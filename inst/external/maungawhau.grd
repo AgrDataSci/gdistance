@@ -1,0 +1,28 @@
+[general] 
+creator=R package 'raster' 
+created= 2010-12-26 20:25:14 
+[georeference] 
+nrows= 87 
+ncols= 61 
+xmin= 2667400 
+ymin= 6478700 
+xmax= 2668010 
+ymax= 6479570 
+projection= +init=epsg:27200 +proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs +towgs84=59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993 
+[data] 
+datatype= FLT4S 
+byteorder= little 
+nbands= 1 
+bandorder= BIL 
+categorical= FALSE 
+levels=  
+minvalue= 94 
+maxvalue= 195 
+nodatavalue= -3.4e+38 
+[legend] 
+legendtype=  
+values=  
+color=  
+[description] 
+layername= v 
+history=  

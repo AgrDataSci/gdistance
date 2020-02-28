@@ -1,0 +1,16 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+^appveyor\.yml$
+^codecov\.yml$
+^docs$
+^pkgdown$
+^CODE_OF_CONDUCT\.md$
+^README\.md$
+^CONTRIBUTING\.md$
+^tests$
+^logo\.svg$
+^dev$
+^doc$
+^Meta$
+^codemeta\.json$
