@@ -5,7 +5,9 @@
 \alias{genDist}
 \alias{popCoord}
 \title{Genetic distances and coordinates of haplogroup R1b1b2 populations in Europe}
-\format{dist object (genDist) and dataframe (popCoord)}
+\format{
+dist object (genDist) and dataframe (popCoord)
+}
 \source{
 Distances calculated from Table S1 in 
 Balaresque et al. (2010). 

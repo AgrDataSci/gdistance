@@ -10,14 +10,14 @@
   "codeRepository": "https://agrobioinfoservices.github.io/gdistance/",
   "issueTracker": "https://github.com/agrobioinfoservices/gdistance/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.2",
+    "version": "4.0.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
+  "runtimePlatform": "R version 4.0.0 (2020-04-24)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -35,7 +35,7 @@
   "contributor": [
     {
       "@type": "Person",
-      "givenName": "Kaue",
+      "givenName": "Kauê",
       "familyName": "de Sousa",
       "email": "kaue.desousa@inn.no",
       "@id": "https://orcid.org/0000-0002-7571-7845"
@@ -46,7 +46,7 @@
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Kaue",
+      "givenName": "Kauê",
       "familyName": "de Sousa",
       "email": "kaue.desousa@inn.no",
       "@id": "https://orcid.org/0000-0002-7571-7845"
@@ -160,7 +160,7 @@
     }
   ],
   "releaseNotes": "https://github.com/agrobioinfoservices/gdistance/blob/master/NEWS.md",
-  "fileSize": "210.026KB",
+  "fileSize": "210.141KB",
   "contIntegration": [
     "https://travis-ci.org/agrobioinfoservices/gdistance",
     "https://codecov.io/github/agrobioinfoservices/gdistance?branch=master"
@@ -194,5 +194,6 @@
       }
     }
   ],
-  "relatedLink": "https://CRAN.R-project.org/package=gdistance"
+  "relatedLink": "https://CRAN.R-project.org/package=gdistance",
+  "readme": "https://github.com/agrobioinfoservices/gdistance/blob/master/README.md"
 }

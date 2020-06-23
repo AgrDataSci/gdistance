@@ -1,3 +1,8 @@
+gdistance 1.3-2 (2020-06-23)
+=========================
+### BUG FIXES 
+* Fix transition with Mahalanobis distance method use `x.minus.y <- raster::getValues(x)[adj[,1],] - raster::getValues(x)[adj[,2],]` instead of `x.minus.y <- xy[adj[,1],-1]-xy[adj[,2],-1]`
+
 gdistance 1.3-1 (2020-02-28)
 =========================
 ### BUG FIXES 

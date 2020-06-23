@@ -305,7 +305,7 @@ setMethod("transition", signature(x = "RasterBrick"),
 			dataCells <- xy[,1]
 			adj <- adjacent(x, cells=dataCells, pairs=TRUE,
 			                target=dataCells, directions=directions)
-			x.minus.y <- xy[adj[,1],-1]-xy[adj[,2],-1]
+			x.minus.y <- raster::getValues(x)[adj[,1],] - raster::getValues(x)[adj[,2],]
 			cov.inv <- solve(cov(xy[,-1]))
 			mahaldistance <- apply(x.minus.y,1,function(x){sqrt((x%*%cov.inv)%*%x)})
 			mahaldistance <- mean(mahaldistance)/(mahaldistance+mean(mahaldistance))
