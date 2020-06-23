@@ -342,7 +342,7 @@ plot(function(x)6 * exp(-3.5 * abs(x + 0.05)), -1, 1, xlab=expression(Slope~ital
 lines(cbind(c(0,0),c(0,6)), lty="longdash")
 ```
 
-We use the Hiking Function to determine the shortest path to hike around the volcano Maunga Whau (Auckland, New Zealand). First, we read in the altitude data for the volcano. This is the `R` base dataset (see `?volcano`), which has been geo-referenced using the information provided by T. Hengl at \url{http://geomorphometry.org/content/volcano-maungawhau}.
+We use the Hiking Function to determine the shortest path to hike around the volcano Maunga Whau (Auckland, New Zealand). First, we read in the altitude data for the volcano. This is the `R` base dataset (see `?volcano`).
 
 ```{r gdistance-18}
 r <- raster(system.file("external/maungawhau.grd", package="gdistance"))

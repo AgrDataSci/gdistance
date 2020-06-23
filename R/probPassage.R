@@ -51,8 +51,8 @@
 #'  paths based on Matlab code by Marco Saerens
 #'  
 #' @seealso 
-#' \code{\link[gdistance]{commuteDistance}}, 
-#' \code{\link[gdistance]{pathInc}}
+#' \code{\link{commuteDistance}}, 
+#' \code{\link{pathInc}}
 #' 
 #' @examples 
 #' #create a new raster and set all its values to unity.

@@ -26,7 +26,6 @@
 #'  in connexion with graphs. \emph{Numerische Mathematik} 1, 269 - 271.
 #' @author Jacob van Etten
 #' @seealso 
-#'  \code{\link[igraph]{shortest_paths}},
 #'  \code{\link{geoCorrection}},
 #'  \code{\link{costDistance}}
 #' @examples
