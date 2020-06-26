@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-3</span>
       </span>
     </div>
 
@@ -335,7 +335,7 @@ Fig. 7. Non-overlapping part of the two routes from origin O to sP1 and sP2 resp
 Fig. 8. Tobler’s Hiking Function.
 </p>
 </div>
-<p>We use the Hiking Function to determine the shortest path to hike around the volcano Maunga Whau (Auckland, New Zealand). First, we read in the altitude data for the volcano. This is the <code>R</code> base dataset (see <code><a href="https://rdrr.io/r/datasets/volcano.html">?volcano</a></code>), which has been geo-referenced using the information provided by T. Hengl at .</p>
+<p>We use the Hiking Function to determine the shortest path to hike around the volcano Maunga Whau (Auckland, New Zealand). First, we read in the altitude data for the volcano. This is the <code>R</code> base dataset (see <code><a href="https://rdrr.io/r/datasets/volcano.html">?volcano</a></code>).</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">r</span> <span class="kw">&lt;-</span> <span class="fu">raster</span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"external/maungawhau.grd"</span>, <span class="kw">package</span><span class="kw">=</span><span class="st">"gdistance"</span>))</pre></body></html></div>
 <p>The Hiking Function requires the slope (<span class="math inline">\(m\)</span>) as input, which can be calculated from the altitude (<span class="math inline">\(z\)</span>) and distance between cell centres (<span class="math inline">\(d\)</span>).</p>
 <p><span class="math display">\[ m_{ij} = (z_j - z_i) / d_{ij} \]</span></p>

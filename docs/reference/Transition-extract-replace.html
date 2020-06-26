@@ -81,7 +81,7 @@ the class TransitionLayer." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-3</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@ the class TransitionStack.</p>
 <p>Also see <code><a href='adjacencyFromTransition.html'>adjacencyFromTransition</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#Create a new raster and set all its values to unity.</span>
+    <pre class="examples"><span class='co'>#Create a new raster and set all its values to unity.</span>
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>raster</span>(<span class='kw'>nrows</span><span class='kw'>=</span><span class='fl'>18</span>, <span class='kw'>ncols</span><span class='kw'>=</span><span class='fl'>36</span>)
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>setValues</span>(<span class='no'>r</span>,<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'>ncell</span>(<span class='no'>r</span>)))
 
@@ -175,13 +175,7 @@ the class TransitionStack.</p>
 <span class='co'>#Extracting and replacing</span>
 <span class='no'>tr1</span>[<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>1</span>:<span class='fl'>9</span>,<span class='fl'>1</span>:<span class='fl'>9</span>)] <span class='kw'>&lt;-</span> <span class='no'>tr2</span>[<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>1</span>:<span class='fl'>9</span>,<span class='fl'>1</span>:<span class='fl'>9</span>)]
 <span class='no'>tr1</span>[<span class='fl'>1</span>:<span class='fl'>9</span>,<span class='fl'>1</span>:<span class='fl'>9</span>] <span class='kw'>&lt;-</span> <span class='no'>tr2</span>[<span class='fl'>1</span>:<span class='fl'>9</span>,<span class='fl'>1</span>:<span class='fl'>9</span>]
-<span class='no'>tr1</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>5</span>]</div><div class='output co'>#&gt; 5 x 5 sparse Matrix of class "dsCMatrix"
-#&gt;               
-#&gt; [1,] . 1 . . .
-#&gt; [2,] 1 . 1 . .
-#&gt; [3,] . 1 . 1 .
-#&gt; [4,] . . 1 . 1
-#&gt; [5,] . . . 1 .</div></pre>
+<span class='no'>tr1</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>5</span>]</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

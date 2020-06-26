@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-3</span>
       </span>
     </div>
 
@@ -193,7 +193,7 @@ Randomized shortest-path problems: two related models.
     <div class='dont-index'><p><code><a href='geoCorrection.html'>geoCorrection</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#Create a new raster and set all its values to unity.</span>
+    <pre class="examples"><span class='co'>#Create a new raster and set all its values to unity.</span>
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>raster</span>(<span class='kw'>nrows</span><span class='kw'>=</span><span class='fl'>18</span>, <span class='kw'>ncols</span><span class='kw'>=</span><span class='fl'>36</span>)
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>setValues</span>(<span class='no'>r</span>,<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fu'>ncell</span>(<span class='no'>raster</span>)))
 
@@ -205,11 +205,7 @@ Randomized shortest-path problems: two related models.
 <span class='no'>sP2</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPoints</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50</span>,<span class='fl'>15</span>,-<span class='fl'>40</span>),<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>,<span class='fl'>20</span>,-<span class='fl'>5</span>)))
 
 <span class='co'>#Calculate the RSP distance between the points</span>
-<span class='fu'>rSPDistance</span>(<span class='no'>tr</span>, <span class='no'>sP1</span>, <span class='no'>sP2</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt;           [,1]      [,2]      [,3]
-#&gt; [1,]  3.054101  9.061349 16.079315
-#&gt; [2,]  9.082282  3.048942  8.058728
-#&gt; [3,] 23.095346 13.073405  6.055039</div><div class='input'>
-</div></pre>
+<span class='fu'>rSPDistance</span>(<span class='no'>tr</span>, <span class='no'>sP1</span>, <span class='no'>sP2</span>, <span class='fl'>1</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

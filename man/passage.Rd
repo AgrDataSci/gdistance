@@ -99,8 +99,8 @@ Saerens M., L. Yen, F. Fouss, and Y. Achbany. 2009.
  \emph{Neural Computation}, 21(8):2363-2404.
 }
 \seealso{
-\code{\link[gdistance]{commuteDistance}}, 
-\code{\link[gdistance]{pathInc}}
+\code{\link{commuteDistance}}, 
+\code{\link{pathInc}}
 }
 \author{
 Jacob van Etten. Implementation of randomised shortest 

@@ -60,8 +60,7 @@ E.W. Dijkstra. 1959. A note on two problems
  in connexion with graphs. \emph{Numerische Mathematik} 1, 269 - 271.
 }
 \seealso{
-\code{\link[igraph]{shortest_paths}},
- \code{\link{geoCorrection}},
+\code{\link{geoCorrection}},
  \code{\link{costDistance}}
 }
 \author{
