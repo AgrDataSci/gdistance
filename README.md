@@ -4,6 +4,7 @@ gdistance
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/gdistance)](https://cran.r-project.org/package=gdistance) 
 [![cran checks](https://cranchecks.info/badges/worst/gdistance)](https://cran.r-project.org/web/checks/check_results_gdistance.html)
+![R-CMD-check](https://github.com/agrobioinfoservices/gdistance/workflows/R-CMD-check/badge.svg)
 [![Build Status](https://travis-ci.org/agrobioinfoservices/gdistance.svg?branch=master)](https://travis-ci.org/agrobioinfoservices/gdistance) 
 [![codecov](https://codecov.io/gh/agrobioinfoservices/gdistance/master.svg)](https://codecov.io/github/agrobioinfoservices/gdistance?branch=master)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
