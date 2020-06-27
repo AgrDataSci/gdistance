@@ -1,8 +1,7 @@
 Package: gdistance
 Type: Package
 Title: Distances and Routes on Geographical Grids
-Version: 1.3-3
-Date: 2020-02-11
+Version: 1.3-5
 Authors@R: c(person("Jacob", "van Etten", role = c("aut"),
         comment = c(ORCID = "0000-0001-7554-2558")), 
         person("Kauê", "de Sousa", role = c("cre", "ctb"), 
@@ -10,7 +9,7 @@ Authors@R: c(person("Jacob", "van Etten", role = c("aut"),
         comment = c(ORCID = "0000-0002-7571-7845")))
 URL: https://agrobioinfoservices.github.io/gdistance/
 BugReports: https://github.com/agrobioinfoservices/gdistance/issues
-Description: Calculate distances and routes on geographic grids.
+Description: Provides classes and functions to calculate various distance measures and routes in heterogeneous geographic spaces represented as grids. The package implements measures to model dispersal histories first presented by van Etten and Hijmans (2010) <doi:10.1371/journal.pone.0012060>. Least-cost distances as well as more complex distances based on (constrained) random walks can be calculated. The distances implemented in the package are used in geographical genetics, accessibility indicators, and may also have applications in other fields of geospatial analysis.
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
