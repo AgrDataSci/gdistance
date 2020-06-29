@@ -67,18 +67,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "markdown",
-      "name": "markdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=markdown"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
       "provider": {
@@ -172,7 +160,7 @@
     }
   ],
   "releaseNotes": "https://github.com/agrobioinfoservices/gdistance/blob/master/NEWS.md",
-  "fileSize": "210.327KB",
+  "fileSize": "204.73KB",
   "contIntegration": [
     "https://travis-ci.org/agrobioinfoservices/gdistance",
     "https://codecov.io/github/agrobioinfoservices/gdistance?branch=master"

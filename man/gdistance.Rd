@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Calculate distances and routes on geographic grids.
+Provides classes and functions to calculate various distance measures and routes in heterogeneous geographic spaces represented as grids. The package implements measures to model dispersal histories first presented by van Etten and Hijmans (2010) <doi:10.1371/journal.pone.0012060>. Least-cost distances as well as more complex distances based on (constrained) random walks can be calculated. The distances implemented in the package are used in geographical genetics, accessibility indicators, and may also have applications in other fields of geospatial analysis.
 }
 \seealso{
 \strong{Useful links:}
