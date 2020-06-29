@@ -1,4 +1,4 @@
-gdistance 1.3-5 (2020-06-27)
+gdistance 1.3-6 (2020-06-29)
 =========================
 
 * expanded Description

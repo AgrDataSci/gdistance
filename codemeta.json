@@ -10,7 +10,7 @@
   "codeRepository": "https://agrobioinfoservices.github.io/gdistance/",
   "issueTracker": "https://github.com/agrobioinfoservices/gdistance/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -64,6 +64,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "markdown",
+      "name": "markdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=markdown"
     },
     {
       "@type": "SoftwareApplication",
@@ -160,7 +172,7 @@
     }
   ],
   "releaseNotes": "https://github.com/agrobioinfoservices/gdistance/blob/master/NEWS.md",
-  "fileSize": "204.73KB",
+  "fileSize": "650.943KB",
   "contIntegration": [
     "https://travis-ci.org/agrobioinfoservices/gdistance",
     "https://codecov.io/github/agrobioinfoservices/gdistance?branch=master"
