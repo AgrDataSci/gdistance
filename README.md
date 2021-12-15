@@ -19,7 +19,7 @@ gdistance
 
 ## Package website
 
-<https://agrobioinfoservices.github.io/gdistance/>
+<https://agrdatasci.github.io/gdistance/>
 
 ## Installation
 
@@ -38,7 +38,7 @@ install_github("agrobioinfoservices/gdistance")
 
 ## Going further
 
-The full functionality of **gdistance** is illustrated in the package vignette. The vignette can be found on the [package website](https://agrobioinfoservices.github.io/gdistance/) or from within `R` once the package has been installed, e.g. via
+The full functionality of **gdistance** is illustrated in the package vignette. The vignette can be found on the [package website](https://agrdatasci.github.io/gdistance/) or from within `R` once the package has been installed, e.g. via
 
 ``` r
 vignette("Overview", package = "gdistance")
@@ -46,7 +46,7 @@ vignette("Overview", package = "gdistance")
 
 ## Meta
 
-  - Please [report any issues or bugs](https://github.com/agrobioinfoservices/gdistance/issues).
+  - Please [report any issues or bugs](https://github.com/AgrDataSci/gdistance/issues).
 
   - License: GPL-3.
 
