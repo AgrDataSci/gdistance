@@ -8,7 +8,7 @@
 #' 
 #' @param x1 \code{TransitionLayer} object
 #' @param x2 \code{TransitionLayer} object
-#' @return TransitionLayer object containing conductance values.
+#' @return \code{TransitionLayer} object containing conductance values.
 #' @details 
 #' To calculate the total resistance of two resistors that are serially 
 #'  connected, we should add their resistance values. However, if we work

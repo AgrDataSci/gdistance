@@ -24,7 +24,7 @@
 \item{e2}{objects}
 }
 \value{
-\code{Transition*} object or numeric.
+a \code{Transition*} object or numeric.
 }
 \description{
 Standard arithmetic operators for computations with \code{Transition*} 

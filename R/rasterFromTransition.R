@@ -6,7 +6,7 @@
 #' @rdname rasterFromTransition
 #' @docType methods
 #' @aliases raster,TransitionLayer-method
-#' @param x a Transition* object
+#' @param x an object of class \code{Transition*}
 #' @param reduceMethod character for the method to reduce the transition matrix.
 #'  See details
 #' @details 

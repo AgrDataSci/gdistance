@@ -15,7 +15,7 @@
 #' @aliases pathInc,TransitionLayer,Coords,Coords,Coords,numeric,Transition-method 
 #' @keywords spatial
 #' 
-#' @param x transition matrix (class Transition)
+#' @param x transition matrix of class \code{Transition*}
 #' @param origin coordinates of the origin (one point location, 
 #'  SpatialPoints, matrix or numeric class)
 #' @param from coordinates of the destinations 

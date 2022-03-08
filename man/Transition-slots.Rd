@@ -26,7 +26,7 @@
 transitionMatrix(x, inflate)
 }
 \arguments{
-\item{x}{object of class Transition*}
+\item{x}{object of class \code{Transition*}}
 
 \item{inflate}{logical (default is \code{TRUE})}
 }

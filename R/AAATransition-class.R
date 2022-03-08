@@ -1,6 +1,6 @@
 #' Transition classes
 #' 
-#' TransitionLayer and TransitionStack (or Transition*) are the core 
+#' TransitionLayer and TransitionStack (or \code{Transition*}) are the core 
 #' classes of the package gdistance. They are the main input into the 
 #' functions to calculate distances and routes. An object of the class
 #' TransitionLayer contains two main elements:
@@ -73,12 +73,11 @@ setClass(Class="TransitionData",
            matrixValues = "conductance"
          ),
          validity = function(object){
-           cond1 <- (nrow(transitionMatrix(object)) == ncol(transitionMatrix(object))) 
-           cond2 <- (object@matrixValues == "resistance" | 
-                       object@matrixValues == "conductance")
-           cond3 <- length(transitionCells(object)) == object@transitionMatrix@Dim[1]
-           cond <- cond1 & cond2 & cond3 
-           return(cond)
+             cond1 <- (nrow(transitionMatrix(object)) == ncol(transitionMatrix(object))) 
+             cond2 <- (object@matrixValues == "resistance" | object@matrixValues == "conductance")
+             cond3 <- length(transitionCells(object)) == object@transitionMatrix@Dim[1]
+             cond <- cond1 & cond2 & cond3 
+             return(cond)
          }
 )
 
@@ -99,8 +98,7 @@ setClass(Class="TransitionLayer",
          ),
          validity = function(object){
            cond1 <- (nrow(object@transitionMatrix) == ncol(object@transitionMatrix)) 
-           cond2 <- (object@matrixValues == "resistance" | 
-                       object@matrixValues == "conductance")
+           cond2 <- (object@matrixValues == "resistance" | object@matrixValues == "conductance")
            cond3 <- length(transitionCells(object)) == object@transitionMatrix@Dim[1]
            cond <- cond1 & cond2 & cond3 
            return(cond)

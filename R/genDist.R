@@ -14,7 +14,6 @@
 #' @aliases genDist
 #' @aliases popCoord
 #' @keywords datasets
-#' 
 #' @references 
 #' Balaresque P., et al. 2010. A predominantly Neolithic 
 #' origin for European paternal lineages. 
@@ -26,6 +25,6 @@
 #' Coordinates from Table 1.
 #' 
 #' @format 
-#' dist object (genDist) and dataframe (popCoord)
+#' dist object (genDist) and data.frame (popCoord)
 c("popCoord", "genDist")
 

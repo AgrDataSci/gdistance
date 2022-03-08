@@ -1,4 +1,5 @@
 #' @importClassesFrom raster RasterLayer
+#' @importClassesFrom raster RasterBrick
 #' @importClassesFrom Matrix sparseMatrix
 #' @exportMethod coerce
 setAs("TransitionLayer", "sparseMatrix", function(from){
@@ -46,10 +47,10 @@ setAs("TransitionLayer", "TransitionStack", function(from){
 )
 
 setAs("TransitionLayer", "TransitionData", function(from){
-  TD <- methods::new("TransitionData",
-  transitionMatrix = from@transitionMatrix,
-  transitionCells = from@transitionCells,
-  matrixValues = from@matrixValues)
+  TD <- new("TransitionData",
+            transitionMatrix = from@transitionMatrix,
+            transitionCells = from@transitionCells,
+            matrixValues = from@matrixValues)
   return(TD)
 }
 )

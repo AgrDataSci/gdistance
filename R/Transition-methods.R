@@ -26,7 +26,7 @@
 #' 
 #' @param e1 objects
 #' @param e2 objects
-#' @return  \code{Transition*} object or numeric.
+#' @return a \code{Transition*} object or numeric.
 #' @examples 
 #' #create a new raster and set all its values to unity.
 #' raster <- raster(nrows=18, ncols=36) 

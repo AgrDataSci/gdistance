@@ -17,7 +17,7 @@
 transitionMatrix(x) <- value
 }
 \arguments{
-\item{x}{Transition* object}
+\item{x}{an object of class \code{Transition*}}
 
 \item{value}{the value to assign}
 }

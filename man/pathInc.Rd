@@ -15,7 +15,7 @@
 pathInc(x, origin, from, to, theta, weight, ...)
 }
 \arguments{
-\item{x}{transition matrix (class Transition)}
+\item{x}{transition matrix of class \code{Transition*}}
 
 \item{origin}{coordinates of the origin (one point location, 
 SpatialPoints, matrix or numeric class)}

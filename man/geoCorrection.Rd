@@ -9,7 +9,7 @@
 geoCorrection(x, type, ...)
 }
 \arguments{
-\item{x}{object of class 'Transition*'}
+\item{x}{object of class \code{Transition*}}
 
 \item{type}{type of correction: "c", "r", or missing 
 (only required for lonlat, see Details)}

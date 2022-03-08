@@ -96,11 +96,7 @@
 #' Connections between a cell inside and a cell outside the area are set to 0.5.
 #' Connections between two cells outside the area are set to 0.
 #' @exportMethod transition
-setGeneric("transition", 
-           function(x, transitionFunction, directions, ...) {
-             standardGeneric("transition")
-             }
-           )
+setGeneric("transition", function(x, transitionFunction, directions, ...) standardGeneric("transition"))
 
 #' @exportMethod transition
 setMethod("transition", 
@@ -295,34 +291,49 @@ setMethod("transition",
 setMethod("transition", signature(x = "RasterBrick"), 
           def = function(x, transitionFunction="mahal", directions)
 		{
-			if(transitionFunction != "mahal")
-			{
-				stop("only Mahalanobis distance method",
-				     " implemented for RasterBrick")
+			if (transitionFunction != "mahal") {
+				stop("only Mahalanobis distance method implemented for RasterBrick \n")
 			}
-			xy <- cbind(1:ncell(x),getValues(x))
+			xy <- cbind(1:ncell(x), getValues(x))
+			
 			xy <- na.omit(xy)
+			
 			dataCells <- xy[,1]
-			adj <- adjacent(x, cells=dataCells, pairs=TRUE,
-			                target=dataCells, directions=directions)
-			x.minus.y <- raster::getValues(x)[adj[,1],] - raster::getValues(x)[adj[,2],]
+			
+			adj <- adjacent(x, cells = dataCells, pairs = TRUE,
+			                target = dataCells, directions = directions)
+			
+			x.minus.y <- raster::getValues(x)[adj[, 1], ] - raster::getValues(x)[adj[, 2], ]
+			
 			cov.inv <- solve(cov(xy[,-1]))
+			
 			mahaldistance <- apply(x.minus.y,1,function(x){sqrt((x%*%cov.inv)%*%x)})
+			
 			mahaldistance <- mean(mahaldistance)/(mahaldistance+mean(mahaldistance))
+			
 			transitiondsC <- new("dsCMatrix", 
 					p = as.integer(rep(0,ncell(x)+1)),
 					Dim = as.integer(c(ncell(x),ncell(x))),
-					Dimnames = list(as.character(1:ncell(x)),as.character(1:ncell(x)))
-			)
+					Dimnames = list(as.character(1:ncell(x)),as.character(1:ncell(x))))
+			
 			transitiondsC[adj] <- mahaldistance
+			
+			nr <- as.integer(nrow(x))
+			nc <- as.integer(ncol(x))
+			
 			tr <- new("TransitionLayer",
-			          nrows=as.integer(nrow(x)),
-			          ncols=as.integer(ncol(x)),
+			          transitionMatrix = transitiondsC,
+			          nrows = nr,
+			          ncols = nc,
 			          extent = extent(x),
-			          crs=projection(x, asText=FALSE),
-			          matrixValues="conductance", 
-			          transitionMatrix = transitiondsC)
+			          crs = projection(x, asText = FALSE), 
+			          matrixValues = "conductance")
+			
 			return(tr)
+			
 		}
 )
+
+
+
 

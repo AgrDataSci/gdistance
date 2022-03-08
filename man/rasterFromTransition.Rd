@@ -8,7 +8,7 @@
 \S4method{raster}{TransitionLayer}(x, reduceMethod = "NZcolMeans")
 }
 \arguments{
-\item{x}{a Transition* object}
+\item{x}{an object of class \code{Transition*}}
 
 \item{reduceMethod}{character for the method to reduce the transition matrix.
 See details}

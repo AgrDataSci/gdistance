@@ -25,7 +25,7 @@
 #' @aliases transitionData,TransitionLayer-method
 #' @aliases transitionData,TransitionStack-method
 #' 
-#' @param x object of class Transition*
+#' @param x object of class \code{Transition*}
 #' @param inflate logical (default is \code{TRUE})
 #' 
 #' @exportMethod transitionMatrix
@@ -142,15 +142,13 @@ setGeneric("transitionData", function(x) {
   standardGeneric("transitionData")
 })
 
-setMethod ("transitionData", signature(x = "TransitionLayer"),
+setMethod("transitionData", signature(x = "TransitionLayer"),
            function(x){
              as(x, "TransitionData")
-           }
-)
+})
 
-setMethod ("transitionData", signature(x = "TransitionStack"),
+setMethod("transitionData", signature(x = "TransitionStack"),
            function(x){
              x@transition
-           }
-)
+})
 

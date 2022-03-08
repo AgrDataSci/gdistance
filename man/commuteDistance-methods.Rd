@@ -67,8 +67,7 @@ Fouss, F., Pirotte, A., Renders, J.-M. & Saerens, M. 2007.
  Transactions on Knowledge and Data Engineering, 19(3), 355-369.
 
 McRae, B.H. 2006. Isolation by resistance. Evolution 60(8), 1551-1561.
-
-\url{http://www.circuitscape.org}
+\url{https://circuitscape.org/}
 }
 \seealso{
 \code{\link{geoCorrection}}

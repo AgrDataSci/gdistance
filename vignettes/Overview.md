@@ -3,7 +3,7 @@ title: "gdistance: Distances and Routes on Geographical Grids"
 package: gdistance
 author:
 - name: Jacob van Etten 
-  affiliation: The Alliance of Bioversity International and CIAT, Rome, Italy
+  affiliation: Systems Transformation, Bioversity International, Montpellier, France
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{gdistance}
@@ -85,7 +85,7 @@ r
 #> dimensions : 3, 3, 9  (nrow, ncol, ncell)
 #> resolution : 120, 60  (x, y)
 #> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+#> crs        : +proj=longlat +datum=WGS84 +no_defs 
 #> source     : memory
 #> names      : layer 
 #> values     : 1, 9  (min, max)
@@ -130,7 +130,7 @@ tr1
 #> dimensions : 3, 3, 9  (nrow, ncol, ncell)
 #> resolution : 120, 60  (x, y)
 #> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+#> crs        : +proj=longlat +datum=WGS84 +no_defs 
 #> values      : conductance 
 #> matrix class: dsCMatrix
 ```
@@ -147,9 +147,9 @@ tr2
 #> dimensions : 3, 3, 9  (nrow, ncol, ncell)
 #> resolution : 120, 60  (x, y)
 #> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+#> crs        : +proj=longlat +datum=WGS84 +no_defs 
 #> values      : conductance 
-#> matrix class: dgCMatrix
+#> matrix class: dgTMatrix
 ```
 
 Note the difference between `tr1` and `tr2` in the slot 'matrix class'. This slot holds information about the matrix class as defined in the package **Matrix** [@maechler2012]. The class `dsCMatrix` is for matrices that are symmetric. The class `dgCMatrix` holds an asymmetric matrix.
@@ -334,6 +334,9 @@ We use the Hiking Function to determine the shortest path to hike around the vol
 
 ```r
 r <- raster(system.file("external/maungawhau.grd", package="gdistance"))
+#> Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj
+#> = prefer_proj): Discarded datum Unknown based on International 1909 (Hayford)
+#> ellipsoid in Proj4 definition
 ```
 
 The Hiking Function requires the slope ($m$) as input, which can be calculated from the altitude ($z$) and distance between cell centres ($d$).
@@ -395,7 +398,13 @@ In the next step, we define two coordinates, A and B, and determine the paths be
 A <- c(2667670, 6479000)
 B <- c(2667800, 6479400)
 AtoB <- shortestPath(Conductance, A, B, output="SpatialLines")
+#> Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj
+#> = prefer_proj): Discarded datum Unknown based on International 1909 (Hayford)
+#> ellipsoid in Proj4 definition
 BtoA <- shortestPath(Conductance, B, A, output="SpatialLines")
+#> Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj
+#> = prefer_proj): Discarded datum Unknown based on International 1909 (Hayford)
+#> ellipsoid in Proj4 definition
 ```
 
 And this code reproduces Figure 9.
@@ -477,6 +486,7 @@ Improvements of **gdistance** and methodological refinements are expected in var
 This should bring more precision to random walk calculations in geospatial analysis. Comparing the results of grid-based calculations to continuous space simulations or analytical solutions would be the way forward [@birch2006].
 
 # Acknowledgements
+
 This research is supported by CGIAR Fund Donors. Work on the **gdistance** package started during the project “Collective Action for the Rehabilitation of Global Public Goods in the CGIAR Genetic Resources System: Phase 2” (2007-2010), under the guidance of Dr Robert Hijmans. Finalizing the package was undertaken as part of the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS), which is a strategic partnership of CGIAR and Future Earth. The views expressed in this document cannot be taken to reflect the official opinions of CGIAR or Future Earth. 
 
 

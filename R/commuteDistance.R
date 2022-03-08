@@ -37,8 +37,7 @@
 #'  Transactions on Knowledge and Data Engineering, 19(3), 355-369.
 #' 
 #' McRae, B.H. 2006. Isolation by resistance. Evolution 60(8), 1551-1561.
-#' 
-#' \url{http://www.circuitscape.org}
+#' \url{https://circuitscape.org/}
 #' 
 #' @author Jacob van Etten
 #' @seealso \code{\link{geoCorrection}}

@@ -3,7 +3,7 @@ title: "gdistance: Distances and Routes on Geographical Grids"
 package: gdistance
 author:
 - name: Jacob van Etten 
-  affiliation: The Alliance of Bioversity International and CIAT, Rome, Italy
+  affiliation: Systems Transformation, Bioversity International, Montpellier, France
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{gdistance}
@@ -487,6 +487,7 @@ Improvements of **gdistance** and methodological refinements are expected in var
 This should bring more precision to random walk calculations in geospatial analysis. Comparing the results of grid-based calculations to continuous space simulations or analytical solutions would be the way forward [@birch2006].
 
 # Acknowledgements
+
 This research is supported by CGIAR Fund Donors. Work on the **gdistance** package started during the project “Collective Action for the Rehabilitation of Global Public Goods in the CGIAR Genetic Resources System: Phase 2” (2007-2010), under the guidance of Dr Robert Hijmans. Finalizing the package was undertaken as part of the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS), which is a strategic partnership of CGIAR and Future Earth. The views expressed in this document cannot be taken to reflect the official opinions of CGIAR or Future Earth. 
 
 

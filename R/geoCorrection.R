@@ -10,7 +10,7 @@
 #' @keywords spatial
 #' @keywords methods
 #' 
-#' @param x object of class 'Transition*'
+#' @param x object of class \code{Transition*}
 #' @param type type of correction: "c", "r", or missing 
 #'  (only required for lonlat, see Details)
 #' @param ... additional arguments passed to methods. \code{multpl} with 

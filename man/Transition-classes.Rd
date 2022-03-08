@@ -19,7 +19,7 @@
 \alias{==,TransitionStack,TransitionStack-method}
 \title{Transition classes}
 \description{
-TransitionLayer and TransitionStack (or Transition*) are the core 
+TransitionLayer and TransitionStack (or \code{Transition*}) are the core 
 classes of the package gdistance. They are the main input into the 
 functions to calculate distances and routes. An object of the class
 TransitionLayer contains two main elements:

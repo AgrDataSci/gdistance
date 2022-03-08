@@ -8,7 +8,7 @@
 #' @keywords spatial
 #' @keywords methods
 #' 
-#' @param x object of class 'Transition*'
+#' @param x object of class \code{Transition*}
 #' @param ... optional argument \code{method} (see Details)
 #' @return an object of class \code{TransitionLayer}
 #' @details 
@@ -30,7 +30,7 @@
 #' @references 
 #' von Luxburg, U. 2007. A tutorial on spectral clustering. 
 #'  Statistics and Computing 17(4), 395-416. 
-#'  \url{http://arxiv.org/PS_cache/arxiv/pdf/0711/0711.0189v1.pdf}
+#'  \doi{https://doi.org/10.1007/s11222-007-9033-z}
 #' 
 #' Chung, F. 1997. Spectral Graph Theory. Conference Board of 
 #'  the Mathematical Sciences, Washington.

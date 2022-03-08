@@ -12,7 +12,7 @@ sumReciprocal(x1, x2)
 \item{x2}{\code{TransitionLayer} object}
 }
 \value{
-TransitionLayer object containing conductance values.
+\code{TransitionLayer} object containing conductance values.
 }
 \description{
 Reciprocal of the sum of the reciprocals of conductance Transition* objects

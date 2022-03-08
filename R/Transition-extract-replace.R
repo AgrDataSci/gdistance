@@ -22,7 +22,7 @@
 #' @aliases transitionMatrix<-
 #' @aliases transitionMatrix<-,TransitionLayer,sparseMatrix-method
 #' 
-#' @param x Transition* object
+#' @param x an object of class \code{Transition*}
 #' @param value the value to assign
 #' @examples 
 #' #Create a new raster and set all its values to unity.
