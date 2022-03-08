@@ -1,23 +1,19 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "gdistance",
-  "description": "Provides classes and functions to calculate various distance measures and routes in heterogeneous geographic spaces represented as grids. The package implements measures to model dispersal histories first presented by van Etten and Hijmans (2010) <doi:10.1371/journal.pone.0012060>. Least-cost distances as well as more complex distances based on (constrained) random walks can be calculated. The distances implemented in the package are used in geographical genetics, accessibility indicators, and may also have applications in other fields of geospatial analysis.",
+  "description": "Provides classes and functions to calculate various \n             distance measures and routes in heterogeneous geographic \n             spaces represented as grids. The package implements measures\n             to model dispersal histories first presented by van Etten and\n             Hijmans (2010) <doi:10.1371/journal.pone.0012060>. Least-cost\n             distances as well as more complex distances based on (constrained)\n             random walks can be calculated. The distances implemented in \n             the package are used in geographical genetics, accessibility \n             indicators, and may also have applications in other fields of\n             geospatial analysis.",
   "name": "gdistance: Distances and Routes on Geographical Grids",
-  "codeRepository": "https://agrobioinfoservices.github.io/gdistance/",
-  "issueTracker": "https://github.com/agrobioinfoservices/gdistance/issues",
+  "codeRepository": "https://agrdatasci.github.io/gdistance/",
+  "issueTracker": "https://github.com/AgrDataSci/gdistance/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "1.3.6",
+  "version": "1.4",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.0 (2020-04-24)",
+  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -41,8 +37,6 @@
       "@id": "https://orcid.org/0000-0002-7571-7845"
     }
   ],
-  "copyrightHolder": {},
-  "funder": {},
   "maintainer": [
     {
       "@type": "Person",
@@ -103,14 +97,14 @@
       "sameAs": "https://CRAN.R-project.org/package=testthat"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 3.2.0"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "raster",
       "name": "raster",
@@ -123,12 +117,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=raster"
     },
-    {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -141,7 +135,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "Matrix",
       "name": "Matrix",
@@ -153,7 +147,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Matrix"
     },
-    {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "sp",
       "name": "sp",
@@ -165,19 +159,14 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sp"
     },
-    {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
-    }
-  ],
-  "releaseNotes": "https://github.com/agrobioinfoservices/gdistance/blob/master/NEWS.md",
-  "fileSize": "650.943KB",
-  "contIntegration": [
-    "https://travis-ci.org/agrobioinfoservices/gdistance",
-    "https://codecov.io/github/agrobioinfoservices/gdistance?branch=master"
-  ],
-  "developmentStatus": "https://www.tidyverse.org/lifecycle/#stable",
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "2873.515KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -191,7 +180,7 @@
       ],
       "name": "R Package gdistance: Distances and Routes on Geographical Grids",
       "identifier": "10.18637/jss.v076.i13",
-      "paginiation": "21",
+      "pagination": "21",
       "@id": "https://doi.org/10.18637/jss.v076.i13",
       "sameAs": "https://doi.org/10.18637/jss.v076.i13",
       "isPartOf": {
@@ -205,7 +194,5 @@
         }
       }
     }
-  ],
-  "relatedLink": "https://CRAN.R-project.org/package=gdistance",
-  "readme": "https://github.com/agrobioinfoservices/gdistance/blob/master/README.md"
+  ]
 }

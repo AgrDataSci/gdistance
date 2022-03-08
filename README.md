@@ -4,8 +4,6 @@ gdistance
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/gdistance)](https://cran.r-project.org/package=gdistance) 
 [![cran checks](https://cranchecks.info/badges/worst/gdistance)](https://cran.r-project.org/web/checks/check_results_gdistance.html)
-![R-CMD-check](https://github.com/agrobioinfoservices/gdistance/workflows/R-CMD-check/badge.svg)
-[![Build Status](https://travis-ci.org/agrobioinfoservices/gdistance.svg?branch=master)](https://travis-ci.org/agrobioinfoservices/gdistance) 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![Downloads](https://cranlogs.r-pkg.org/badges/gdistance)](https://cran.r-project.org/package=gdistance) 
 [![DOI](https://img.shields.io/badge/JSS-%0910.18637%2Fjss.v076.i13-blue.svg)](http://dx.doi.org/10.18637/jss.v076.i13)
@@ -33,7 +31,7 @@ The development version can be installed via
 
 ``` r
 library("devtools")
-install_github("agrobioinfoservices/gdistance")
+install_github("agrdatasci/gdistance")
 ```
 
 ## Going further

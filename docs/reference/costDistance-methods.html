@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3-6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -113,8 +113,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/agrobioinfoservices/gdistance/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/AgrDataSci/gdistance/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,7 +132,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cost distance</h1>
-    <small class="dont-index">Source: <a href='https://github.com/agrobioinfoservices/gdistance/blob/master/R/costDistance.R'><code>R/costDistance.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/AgrDataSci/gdistance/blob/master/R/costDistance.R'><code>R/costDistance.R</code></a></small>
     <div class="hidden name"><code>costDistance-methods.Rd</code></div>
     </div>
 
@@ -140,7 +140,7 @@
     <p>Calculate the least-cost distance between points.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>costDistance</span>(<span class='no'>x</span>, <span class='no'>fromCoords</span>, <span class='no'>toCoords</span>)</pre>
+    <pre class="usage"><span class='fu'>costDistance</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fromCoords</span>, <span class='va'>toCoords</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,31 +180,36 @@ locations (of <code>SpatialPoints</code>, matrix or numeric class)</p></td>
 
     <div class='dont-index'><p><code><a href='geoCorrection.html'>geoCorrection</a></code>,
  <code><a href='accCost.html'>accCost</a></code>,</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Jacob van Etten</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"raster"</span>)
+    <pre class="examples"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://rspatial.org/raster'>"raster"</a></span><span class='op'>)</span>
 <span class='co'># create a new raster and set all its values to unity.</span>
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='kw'>nrows</span><span class='kw'>=</span><span class='fl'>18</span>, <span class='kw'>ncols</span><span class='kw'>=</span><span class='fl'>36</span>)
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/setValues.html'>setValues</a></span>(<span class='no'>r</span>,<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/raster/man/ncell.html'>ncell</a></span>(<span class='no'>r</span>),<span class='fl'>0</span>,<span class='fl'>1</span>))
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span>nrows<span class='op'>=</span><span class='fl'>18</span>, ncols<span class='op'>=</span><span class='fl'>36</span><span class='op'>)</span> 
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>,<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>,<span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># create a Transition object from the raster</span>
-<span class='no'>tr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='transition.html'>transition</a></span>(<span class='no'>r</span>,<span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>/<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>x</span>),<span class='fl'>8</span>)
+<span class='va'>tr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='transition.html'>transition</a></span><span class='op'>(</span><span class='va'>r</span>,<span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fl'>1</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,<span class='fl'>8</span><span class='op'>)</span>
 
 <span class='co'># asymmetric</span>
-<span class='no'>ncf</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>x</span>) - <span class='no'>x</span>[<span class='fl'>1</span>] + <span class='no'>x</span>[<span class='fl'>2</span>]
-<span class='no'>tr2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='transition.html'>transition</a></span>(<span class='no'>r</span>,<span class='no'>ncf</span>,<span class='fl'>8</span>, <span class='kw'>symm</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='va'>ncf</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>+</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
+<span class='va'>tr2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='transition.html'>transition</a></span><span class='op'>(</span><span class='va'>r</span>,<span class='va'>ncf</span>,<span class='fl'>8</span>, symm<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'># create two sets of coordinates</span>
-<span class='no'>sP1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>65</span>,<span class='fl'>5</span>,-<span class='fl'>65</span>),<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>55</span>,<span class='fl'>35</span>,-<span class='fl'>35</span>))
-<span class='no'>sP2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50</span>,<span class='fl'>15</span>,-<span class='fl'>40</span>),<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>80</span>,<span class='fl'>20</span>,-<span class='fl'>5</span>))
+<span class='va'>sP1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>65</span>,<span class='fl'>5</span>,<span class='op'>-</span><span class='fl'>65</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>55</span>,<span class='fl'>35</span>,<span class='op'>-</span><span class='fl'>35</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>sP2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>50</span>,<span class='fl'>15</span>,<span class='op'>-</span><span class='fl'>40</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>80</span>,<span class='fl'>20</span>,<span class='op'>-</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># from and to identical</span>
-<span class='fu'>costDistance</span>(<span class='no'>tr</span>,<span class='no'>sP1</span>)
-<span class='fu'>costDistance</span>(<span class='no'>tr2</span>,<span class='no'>sP1</span>)
+<span class='fu'>costDistance</span><span class='op'>(</span><span class='va'>tr</span>,<span class='va'>sP1</span><span class='op'>)</span>
+<span class='fu'>costDistance</span><span class='op'>(</span><span class='va'>tr2</span>,<span class='va'>sP1</span><span class='op'>)</span>
 
 <span class='co'># from and to different</span>
-<span class='fu'>costDistance</span>(<span class='no'>tr</span>,<span class='no'>sP1</span>,<span class='no'>sP2</span>)
-<span class='fu'>costDistance</span>(<span class='no'>tr2</span>,<span class='no'>sP1</span>,<span class='no'>sP2</span>)</pre>
+<span class='fu'>costDistance</span><span class='op'>(</span><span class='va'>tr</span>,<span class='va'>sP1</span>,<span class='va'>sP2</span><span class='op'>)</span>
+<span class='fu'>costDistance</span><span class='op'>(</span><span class='va'>tr2</span>,<span class='va'>sP1</span>,<span class='va'>sP2</span><span class='op'>)</span>
+
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -220,7 +225,7 @@ locations (of <code>SpatialPoints</code>, matrix or numeric class)</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
