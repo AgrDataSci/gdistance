@@ -73,7 +73,7 @@ setClass(Class="TransitionData",
            matrixValues = "conductance"
          ),
          validity = function(object){
-             cond1 <- (nrow(transitionMatrix(object)) == ncol(transitionMatrix(object))) 
+             cond1 <- (nrow(object@transitionMatrix) == ncol(object@transitionMatrix))
              cond2 <- (object@matrixValues == "resistance" | object@matrixValues == "conductance")
              cond3 <- length(transitionCells(object)) == object@transitionMatrix@Dim[1]
              cond <- cond1 & cond2 & cond3 
