@@ -104,14 +104,11 @@ setMethod("transition",
           def = function(x, transitionFunction, directions, 
                          symm=TRUE, intervalBreaks=NULL)
 		{
-			if(class(transitionFunction)=="character") 
-			{
-				if(transitionFunction != "barriers" & transitionFunction != "areas")
-				{
+			if(is(transitionFunction, "character"))	{
+				if(transitionFunction != "barriers" & transitionFunction != "areas") {
 					stop("argument transitionFunction invalid")
 				}
-				if(transitionFunction=="barriers")
-				{
+				if(transitionFunction=="barriers") {
 					return(.barriers(x, directions, symm, intervalBreaks))
 				}
 				if(transitionFunction=="areas")

@@ -59,6 +59,7 @@
 #' commuteDistance(tr, sP1)
 #' 
 #' @exportMethod commuteDistance
+#' @importFrom methods is
 setGeneric("commuteDistance", 
            function(x, coords) standardGeneric("commuteDistance"))
 
@@ -79,7 +80,7 @@ setMethod("commuteDistance",
 )
 
 .rD <- function(x, coords){
-  if(class(transitionMatrix(x)) != "dsCMatrix"){
+  if(isFALSE(is(transitionMatrix(x), "dsCMatrix"))){
     stop("symmetric transition matrix required",
          "(dsCMatrix) in TransitionLayer object x")}
   coords <- .coordsToMatrix(coords)

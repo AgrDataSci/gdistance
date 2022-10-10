@@ -1,13 +1,13 @@
 Package: gdistance
 Type: Package
 Title: Distances and Routes on Geographical Grids
-Version: 1.5
+Version: 1.6
 Authors@R: c(person("Jacob", "van Etten", role = c("aut"),
         comment = c(ORCID = "0000-0001-7554-2558")), 
         person("Kauê", "de Sousa", role = c("cre", "ctb"), 
         email = "desousa.kaue@gmail.com", 
         comment = c(ORCID = "0000-0002-7571-7845")))
-URL: https://agrdatasci.github.io/gdistance/
+URL: https://AgrDataSci.github.io/gdistance/
 BugReports: https://github.com/AgrDataSci/gdistance/issues
 Description: Provides classes and functions to calculate various 
              distance measures and routes in heterogeneous geographic 

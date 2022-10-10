@@ -161,7 +161,7 @@ setMethod("geoCorrection",
   correctionMatrix <- new("dgTMatrix", i = i, j = j, x = xv, 
                           Dim = as.integer(c(dims,dims)))
   correctionMatrix <- (methods::as(correctionMatrix,"sparseMatrix"))
-  if(class(transitionMatrix(x)) == "dsCMatrix"){
+  if(is(transitionMatrix(x), "dsCMatrix")){
     correctionMatrix <- forceSymmetric(correctionMatrix)
   }  #isSymmetric?
   if(!multpl) 

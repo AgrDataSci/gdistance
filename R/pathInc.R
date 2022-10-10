@@ -297,24 +297,22 @@ setMethod("pathInc", signature(x = "TransitionLayer", origin = "Coords", from = 
 		
 	Size <- nrow(index1)
 	
-	if(class(weight) == "numeric")
-	{
+	if(is(weight, "numeric")) {
 		R <- 1/x[index2]
 		R[R == Inf] <- 0
 		R <- matrix(R, nrow=1)
 	}
-	if(class(weight) == "TransitionLayer")
-	{
-		if(matrixValues(weight) == "conductance"){
+	
+	if(is(weight, "TransitionLayer")) {
+		if(matrixValues(weight) == "conductance") {
 		  R <- 1/weight[index1]} else{R <- weight[index1]
 		  }
 	  
 		R[R == Inf] <- 0
 		R <- matrix(R, nrow=1)
 	}
-	if(class(weight) == "TransitionStack")
-	{
-		R <- matrix(nrow=nlayers(weight), ncol=length(index1[,1]))
+	if(is(weight, "TransitionStack")) {
+		R <- matrix(nrow = nlayers(weight), ncol = length(index1[, 1]))
 		for(i in 1:nlayers(weight))
 		{
 			if(matrixValues(weight[[i]]) == "conductance"){
