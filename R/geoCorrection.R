@@ -32,7 +32,7 @@
 #' When working with lonlat grids, users should also anticipate whether they 
 #'  will use methods based on either least-cost or random walks, and set the 
 #'  type argument accordingly. In the case of least-cost distances, the 
-#'  correction is only done in East-West direction. In the case of random walks 
+#'  correction is only done in East-West direction (\code{type="c"}). In the case of random walks 
 #'  there should be an additional correction which reduces the conductance in
 #'  North-South direction (\code{type="r"}).
 #' 
