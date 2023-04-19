@@ -8,7 +8,7 @@ Authors@R: c(
         person("Kauê", "de Sousa", role = c("ctb"),
           comment = c(ORCID = "0000-0002-7571-7845")),
         person("Andrew", "Marx", role = c("cre", "ctb"),
-          email = "ajm-rpackages@gmail.com",
+          email = "ajm.rpackages@gmail.com",
           comment = c(ORCID = "0000-0002-7456-1631")))
 URL: https://AgrDataSci.github.io/gdistance/
 BugReports: https://github.com/AgrDataSci/gdistance/issues
