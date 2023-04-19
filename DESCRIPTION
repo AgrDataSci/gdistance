@@ -2,11 +2,14 @@ Package: gdistance
 Type: Package
 Title: Distances and Routes on Geographical Grids
 Version: 1.6
-Authors@R: c(person("Jacob", "van Etten", role = c("aut"),
-        comment = c(ORCID = "0000-0001-7554-2558")), 
-        person("Kauê", "de Sousa", role = c("cre", "ctb"), 
-        email = "desousa.kaue@gmail.com", 
-        comment = c(ORCID = "0000-0002-7571-7845")))
+Authors@R: c(
+        person("Jacob", "van Etten", role = c("aut"),
+          comment = c(ORCID = "0000-0001-7554-2558")),
+        person("Kauê", "de Sousa", role = c("ctb"),
+          comment = c(ORCID = "0000-0002-7571-7845")),
+        person("Andrew", "Marx", role = c("cre", "ctb"),
+          email = "ajm-rpackages@gmail.com",
+          comment = c(ORCID = "0000-0002-7456-1631")))
 URL: https://AgrDataSci.github.io/gdistance/
 BugReports: https://github.com/AgrDataSci/gdistance/issues
 Description: Provides classes and functions to calculate various 
@@ -36,5 +39,5 @@ Suggests:
     markdown,
     rmarkdown,
     testthat (>= 2.1.0)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
