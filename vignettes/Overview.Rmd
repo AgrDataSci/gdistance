@@ -470,7 +470,7 @@ An important assumption behind these distance measures, however, is that dispers
 
 How well does a geographic wave of expansion from Anatolia explain the spatial pattern? The function `pathInc` calculates the overlap (and non-overlap) of dispersal paths from a common origin on the grid as a distance measure between points.
 
-```{r gdistance-26}
+```{r gdistance-26, eval = FALSE}
 origin <- unlist(popCoord[22,c("x","y")])
 pI <- pathInc(trC, origin=origin, from=pC, 
   functions=list(overlap))
