@@ -16,3 +16,5 @@
 ^Meta$
 ^codemeta\.json$
 figure$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
