@@ -51,5 +51,16 @@ masklist = list(
     1,  1,  1,  1,  1,  1,  1,  1,  1), 9)
 )
 
+ext = raster::extent(c(0, 8, 0, 9))
+ncol = ncol(res)
+nrow = nrow(res)
+ncell = length(res)
 
-reslist = lapply(masklist, function(x) res * x)
+testlist = lapply(
+  masklist,
+  function(x) {
+    res = raster::raster(res * x)
+    extent(res) = ext
+    res
+  })
+
