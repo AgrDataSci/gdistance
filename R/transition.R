@@ -103,16 +103,6 @@ setMethod(
   "transition",
   signature(x = "RasterLayer"),
   function(x, transitionFunction, directions, symm = TRUE, intervalBreaks = NULL) {
-    x <- terra::rast(x)
-    res <- transition(x, transitionFunction, directions, symm, intervalBreaks)
-  }
-)
-
-#' @exportMethod transition
-setMethod(
-  "transition",
-  signature(x = "SpatRaster"),
-  function(x, transitionFunction, directions, symm = TRUE, intervalBreaks = NULL) {
     if(is(transitionFunction, "character"))	{
       if(transitionFunction != "barriers" & transitionFunction != "areas") {
         stop("argument transitionFunction invalid")
@@ -177,6 +167,11 @@ setMethod(
 
 # Modified from https://github.com/andrewmarx/samc/blob/1d9973882477180fa90ca7a570c3a0db8cadfbe2/R/internal-functions.R#L13
 .TfromR_new <- function(x, tr_fun, dir, sym) {
+  extent <- raster::extent(x)
+  crs <- raster::projection(x, asText=FALSE)
+
+  x <- terra::rast(x)
+
   tr_vals <- .tr_vals_simple(x, tr_fun, dir, sym)
 
   nedges <- sum(is.finite(tr_vals))
@@ -185,6 +180,8 @@ setMethod(
   ncols <- terra::ncol(x)
   ncells <- terra::ncell(x)
   cell_nums <- terra::cells(x)
+
+  rm(x)
 
   if (dir == 4) {
     dir_vec <- c(1:4)
@@ -260,19 +257,17 @@ setMethod(
   mat@i <- as.integer(mat_i)
   mat@x <- mat_x
 
-  x <- raster(x)
   new("TransitionLayer",
       nrows = as.integer(nrows),
       ncols = as.integer(ncols),
-      extent = raster::extent(x),
-      crs = raster::projection(x, asText=FALSE),
+      extent = extent,
+      crs = crs,
       transitionMatrix = mat,
       transitionCells = 1:ncells,
       matrixValues = "conductance")
 }
 
 .TfromR_old <- function(x, transitionFunction, directions, symm) {
-  x <- raster(x)
   tr <- new("TransitionLayer",
             nrows = as.integer(raster::nrow(x)),
             ncols = as.integer(raster::ncol(x)),
