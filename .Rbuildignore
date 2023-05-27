@@ -18,3 +18,4 @@
 figure$
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
+^other$
