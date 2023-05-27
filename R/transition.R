@@ -99,59 +99,210 @@
 setGeneric("transition", function(x, transitionFunction, directions, ...) standardGeneric("transition"))
 
 #' @exportMethod transition
-setMethod("transition", 
-          signature(x = "RasterLayer"), 
-          def = function(x, transitionFunction, directions, 
-                         symm=TRUE, intervalBreaks=NULL)
-		{
-			if(is(transitionFunction, "character"))	{
-				if(transitionFunction != "barriers" & transitionFunction != "areas") {
-					stop("argument transitionFunction invalid")
-				}
-				if(transitionFunction=="barriers") {
-					return(.barriers(x, directions, symm, intervalBreaks))
-				}
-				if(transitionFunction=="areas")
-				{
-					return(.areas(x, directions))
-				}
-			} else {
-				return(.TfromR(x, transitionFunction, directions, symm))
-			}
-		}
+setMethod(
+  "transition",
+  signature(x = "RasterLayer"),
+  function(x, transitionFunction, directions, symm = TRUE, intervalBreaks = NULL) {
+    x <- terra::rast(x)
+    res <- transition(x, transitionFunction, directions, symm, intervalBreaks)
+  }
 )
 
-.TfromR <- function(x, transitionFunction, directions, symm)
-{
-	tr <- new("TransitionLayer",
-		nrows=as.integer(nrow(x)),
-		ncols=as.integer(ncol(x)),
-		extent=extent(x),
-		crs=projection(x, asText=FALSE),
-		transitionMatrix = Matrix(0,ncell(x),ncell(x)),
-		transitionCells = 1:ncell(x))
-	transitionMatr <- transitionMatrix(tr)
-	Cells <- which(!is.na(getValues(x)))
-	adj <- adjacent(x, cells=Cells, pairs=TRUE, 
-	                target=Cells, 
-	                directions=directions)
-	if(symm){adj <- adj[adj[,1] < adj[,2],]}
-	dataVals <- cbind(getValues(x)[adj[,1]],
-	                  getValues(x)[adj[,2]])
-	transition.values <- apply(dataVals,1,transitionFunction)
-	
-	if(!all(transition.values>=0)){
-	  warning("transition function gives negative values")
-	}
-	
-	transitionMatr[adj] <- as.vector(transition.values)
-	if(symm)
-	{
-		transitionMatr <- forceSymmetric(transitionMatr)
-	}
-	transitionMatrix(tr) <- transitionMatr
-	matrixValues(tr) <- "conductance"
-	return(tr)
+#' @exportMethod transition
+setMethod(
+  "transition",
+  signature(x = "SpatRaster"),
+  function(x, transitionFunction, directions, symm = TRUE, intervalBreaks = NULL) {
+    if(is(transitionFunction, "character"))	{
+      if(transitionFunction != "barriers" & transitionFunction != "areas") {
+        stop("argument transitionFunction invalid")
+      }
+      if(transitionFunction == "barriers") {
+        return(.barriers(x, directions, symm, intervalBreaks))
+      }
+      if(transitionFunction == "areas") {
+        return(.areas(x, directions))
+      }
+    } else {
+      if (directions %in% c(4, 8)) {
+        return(.TfromR_new(x, transitionFunction, directions, symm))
+      } else {
+        return(.TfromR_old(x, transitionFunction, directions, symm))
+      }
+    }
+  }
+)
+
+# Modified from https://github.com/andrewmarx/samc/blob/1d9973882477180fa90ca7a570c3a0db8cadfbe2/R/internal-functions.R#L332
+.tr_vals_simple <- function(data, fun, dir, sym) {
+
+  nrows <- terra::nrow(data)
+  ncols <- terra::ncol(data)
+
+  if (sym) {
+    result <- numeric(nrows * ncols * dir / 2)
+  } else {
+    result <- numeric(nrows * ncols * dir)
+  }
+  index <- 0
+
+  if (dir == 4) {
+    dir <- c(2, 4, 6, 8)
+  } else if (dir == 8) {
+    dir <- c(1:4, 6:9)
+  } else if (dir == 16) {
+    # TODO 16 directions
+    stop("16 directions not reimplemented yet")
+  } else {
+    stop("Bad directions", call. = FALSE)
+  }
+
+  if (sym) dir <- dir[(length(dir)/2 + 1):length(dir)]
+
+  for (r in 1:nrows) {
+    vals <- terra::focalValues(data, 3, r, 1)
+
+    for (c in 1:ncols) {
+      v <- vals[c, 5]
+      for (d in dir) {
+        index <- index + 1
+
+        result[index] <- fun(c(v, vals[c, d]))
+      }
+    }
+  }
+
+  result
+}
+
+# Modified from https://github.com/andrewmarx/samc/blob/1d9973882477180fa90ca7a570c3a0db8cadfbe2/R/internal-functions.R#L13
+.TfromR_new <- function(x, tr_fun, dir, sym) {
+  tr_vals <- .tr_vals_simple(x, tr_fun, dir, sym)
+
+  nedges <- sum(is.finite(tr_vals))
+
+  nrows <- terra::nrow(x)
+  ncols <- terra::ncol(x)
+  ncells <- terra::ncell(x)
+  cell_nums <- terra::cells(x)
+
+  if (dir == 4) {
+    dir_vec <- c(1:4)
+    offsets <- c(-ncols, -1, 1, ncols)
+  } else if (dir == 8) {
+    dir_vec <- c(1:8)
+    offsets <- c(-ncols - 1, -ncols, -ncols + 1, -1, 1, ncols - 1, ncols, ncols + 1)
+  } else if (dir == 16) {
+    # TODO 16 directions
+    stop("16 directions not reimplemented yet")
+  } else {
+    stop("Bad directions", call. = FALSE)
+  }
+
+  dir_sym <- dir
+
+  if (sym) {
+    dir_sym <- dir/2
+    dir_vec <- dir_vec[(dir_sym + 1):dir]
+    offsets <- offsets[(dir_sym + 1):dir]
+  }
+
+  # Fill out mat_p
+  mat_p <- integer(ncells + 1)
+
+  for (i in 1:length(tr_vals)) {
+    if (is.finite(tr_vals[i])) {
+      d <- ((i - 1) %% dir_sym) + 1
+      p1 <- ((i - 1) %/% dir_sym) + 1
+      p2 <- p1 + offsets[d]
+
+      mat_p[p2 + 1] <- mat_p[p2 + 1] + 1
+    }
+  }
+
+  for (i in 2:length(mat_p)) {
+    mat_p[i] <- mat_p[i] + mat_p[i - 1]
+  }
+
+  mat_p_count <- integer(ncells + 1)
+
+  mat_x <- numeric(nedges)
+  mat_i <- integer(nedges)
+
+  for (i in 1:length(tr_vals)) {
+    if (is.finite(tr_vals[i])) {
+      d <- ((i - 1) %% dir_sym) + 1
+      p1 <- ((i - 1) %/% dir_sym) + 1
+      p2 <- p1 + offsets[d]
+
+      mat_p_count[p2] <- mat_p_count[p2] + 1
+
+      mat_x[mat_p[p2] + mat_p_count[p2]] <- tr_vals[i]
+      mat_i[mat_p[p2] + mat_p_count[p2]] <- p1
+    }
+  }
+
+  mat_i <- mat_i - 1
+
+  if(!all(mat_x >= 0)){
+    warning("transition function gives negative values")
+  }
+
+  if(sym) {
+    mat <- new("dsCMatrix")
+  } else {
+    mat <- new("dgCMatrix")
+  }
+
+  mat@Dim <- c(as.integer(ncells), as.integer(ncells))
+
+  mat@p <- as.integer(mat_p)
+  mat@i <- as.integer(mat_i)
+  mat@x <- mat_x
+
+  x <- raster(x)
+  new("TransitionLayer",
+      nrows = as.integer(nrows),
+      ncols = as.integer(ncols),
+      extent = raster::extent(x),
+      crs = raster::projection(x, asText=FALSE),
+      transitionMatrix = mat,
+      transitionCells = 1:ncells,
+      matrixValues = "conductance")
+}
+
+.TfromR_old <- function(x, transitionFunction, directions, symm) {
+  x <- raster(x)
+  tr <- new("TransitionLayer",
+            nrows = as.integer(raster::nrow(x)),
+            ncols = as.integer(raster::ncol(x)),
+            extent = raster::extent(x),
+            crs = raster::projection(x, asText = FALSE),
+            transitionMatrix = Matrix(0, raster::ncell(x), raster::ncell(x)),
+            transitionCells = 1:raster::ncell(x))
+
+  transitionMatr <- transitionMatrix(tr)
+  Cells <- which(!is.na(raster::getValues(x)))
+  adj <- raster::adjacent(x, cells = Cells, pairs = TRUE,
+                          target = Cells,
+                          directions = directions)
+  if(symm) { adj <- adj[adj[, 1] < adj[, 2], ] }
+  dataVals <- cbind(raster::getValues(x)[adj[, 1]],
+                    raster::getValues(x)[adj[, 2]])
+  transition.values <- apply(dataVals, 1, transitionFunction)
+
+  if(!all(transition.values >= 0)){
+    warning("transition function gives negative values")
+  }
+
+  transitionMatr[adj] <- as.vector(transition.values)
+  if(symm) {
+    transitionMatr <- forceSymmetric(transitionMatr)
+  }
+  transitionMatrix(tr) <- transitionMatr
+  matrixValues(tr) <- "conductance"
+
+  return(tr)
 }
 
 .barriers <- function(x, directions, symm, intervalBreaks) {

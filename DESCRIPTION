@@ -30,7 +30,8 @@ Depends:
     raster (>= 1.9-19),
     methods, 
     igraph (>= 0.7.0), 
-    Matrix
+    Matrix,
+    terra
 Imports: 
     sp,
     stats
