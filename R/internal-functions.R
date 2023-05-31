@@ -244,3 +244,23 @@
 }
 
 
+#' Determine if raster is a global lon/lat raster that "wraps" in the East-West direction
+#'
+#' Function copied from the raster package (GPL3)
+#' https://github.com/rspatial/raster/blob/263530499eefdb2d4f07f40af1ce7c9364d2fcc4/R/isLonLat.R#L8
+#'
+#' @param x Raster* object
+#' @return logical
+#' @noRd
+.isGlobalLonLat <- function(x) {
+  res <- FALSE
+  tolerance <- 0.1
+  scale <- xres(x)
+  if (isTRUE(all.equal(xmin(x), -180, tolerance = tolerance, scale = scale)) &
+      isTRUE(all.equal(xmax(x),  180, tolerance = tolerance, scale = scale))) {
+    if (couldBeLonLat(x, warnings = FALSE)) {
+      res <- TRUE
+    }
+  }
+  res
+}
