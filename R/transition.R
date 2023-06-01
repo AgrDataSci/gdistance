@@ -104,8 +104,9 @@ setMethod(
   signature(x = "RasterLayer"),
   function(x, transitionFunction, directions, symm = TRUE, intervalBreaks = NULL) {
     if (.isGlobalLonLat(x)) {
-      warning("The extent and CRS indicate this raster is a global lat/lon raster.",
-              "This means that transitions going off of the East or West edges will 'wrap' to the opposite edge.")
+      message("The extent and CRS indicate this raster is a global lat/lon raster. ",
+              "This means that transitions going off of the East or West edges ",
+              "will 'wrap' to the opposite edge.")
     }
 
     if(is(transitionFunction, "character"))	{
@@ -121,11 +122,13 @@ setMethod(
     } else {
       if (directions %in% c(4, 8)) {
         if (.isGlobalLonLat(x)) {
-          stop("Global lat/lon rasters are not supported under new optimizations for 4 and 8 directions with custom transition functions.",
-               "If you need to support this type of raster, please report as an issue on GitHub.",
-                call. = FALSE)
+          message("Global lat/lon rasters are not supported under new ",
+                  "optimizations for 4 and 8 directions with custom transition ",
+                  "functions. Falling back to old method.")
+          return(.TfromR_old(x, transitionFunction, directions, symm))
+        } else {
+          return(.TfromR_new(x, transitionFunction, directions, symm))
         }
-        return(.TfromR_new(x, transitionFunction, directions, symm))
       } else {
         return(.TfromR_old(x, transitionFunction, directions, symm))
       }
