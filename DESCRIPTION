@@ -30,11 +30,11 @@ Depends:
     raster (>= 1.9-19),
     methods, 
     igraph (>= 0.7.0), 
-    Matrix,
-    terra
+    Matrix
 Imports: 
     sp,
-    stats
+    stats,
+    terra
 Suggests:
     knitr,
     markdown,
