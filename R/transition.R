@@ -421,7 +421,7 @@ setMethod(
 
 		for(i in 1:n) {
 			transitionFunction <- function(v) { return(sum(v == i) / 2) }
-			XlayerNew <- .TfromR(x, transitionFunction, directions, symm = TRUE)
+			XlayerNew <- .TfromR_old(x, transitionFunction, directions, symm = TRUE) # TODO integrate with new optimizations
 			Xstack <- stack(Xstack, XlayerNew)
 		}
 	} else {
