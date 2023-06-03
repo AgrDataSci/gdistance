@@ -287,7 +287,7 @@ setMethod("pathInc", signature(x = "TransitionLayer", origin = "Coords", from = 
 
 	A <- as(transitionMatrix(x,inflate=FALSE),"lMatrix")
 	A <- as(A,"dMatrix")
-	AIndex <- as(A, "dgTMatrix")
+	AIndex <- as(as(A, "generalMatrix"), "TsparseMatrix")
 	index1 <- cbind(transitionCells(x)[as.integer(AIndex@i+1)],
 	                transitionCells(x)[as.integer(AIndex@j+1)])
 	#TODO use adjacencyFromTransition()
