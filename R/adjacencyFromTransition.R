@@ -33,11 +33,10 @@
 #' head(aft)
 #'
 #' @export
-adjacencyFromTransition <- function(x)
-{
+adjacencyFromTransition <- function(x) {
 	tc <- transitionCells(x)
 	x <- transitionMatrix(x)
-	transition.dgT <- as(x, "dgTMatrix")
+	transition.dgT <- as(as(x, "generalMatrix"), "TsparseMatrix")
 	adj <- cbind(transition.dgT@i + 1, transition.dgT@j + 1)
 	adj <- cbind(tc[adj[, 1]], tc[adj[, 2]])
 	return(adj)
