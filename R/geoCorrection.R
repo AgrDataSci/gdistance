@@ -75,106 +75,91 @@ setGeneric("geoCorrection", function(x, type, ...) {
 )
 
 
-setMethod("geoCorrection",
-          signature(x = "TransitionLayer", type="missing"),
-          def = function(x, multpl=FALSE, scl=FALSE)
-{
-  return(geoCorrection(x, type="c", multpl, scl))
-}
+setMethod(
+  "geoCorrection",
+  signature(x = "TransitionLayer", type = "missing"),
+  function(x, multpl = FALSE, scl = FALSE) {
+    return(geoCorrection(x, type = "c", multpl, scl))
+  }
 )
 
 
-setMethod("geoCorrection",
-          signature(x = "TransitionLayer", type="character"),
-          def = function(x, type, multpl=FALSE, scl=FALSE)
-{
-  scaleValue <- 1
-  if(scl)
-  {
-    midpoint <- c(mean(c(xmin(x),xmax(x))),mean(c(ymin(x),ymax(x))))
-    scaleValue <- pointDistance(midpoint,midpoint+c(xres(x),0), longlat=isLonLat(x))
-  }
-  if(isLonLat(x))
-  {
-    if (type != "c" & type != "r"){
-      stop("type can only be c or r")
+setMethod(
+  "geoCorrection",
+  signature(x = "TransitionLayer", type = "character"),
+  function(x, type, multpl = FALSE, scl = FALSE) {
+    scaleValue <- 1
+    if (scl) {
+      midpoint <- c(mean(c(xmin(x), xmax(x))), mean(c(ymin(x), ymax(x))))
+      scaleValue <- pointDistance(midpoint, midpoint + c(xres(x), 0), longlat = isLonLat(x))
     }
+    if (isLonLat(x)) {
+      if (type != "c" & type != "r") {
+        stop("type can only be c or r")
+      }
 
-    # if (type == "r" & matrixValues(x) != "conductance"){
-    #   stop("matrix of Transition object must have conductance values")
-    # }
+      # if (type == "r" & matrixValues(x) != "conductance"){
+      #   stop("matrix of Transition object must have conductance values")
+      # }
 
-    adj <- adjacencyFromTransition(x)
-    correction <- cbind(raster::xyFromCell(x,adj[,1]),
-                        raster::xyFromCell(x,adj[,2]))
-    if(matrixValues(x) == "conductance") {
-      correctionValues <- 1/(raster::pointDistance(correction[,1:2],
-                                                   correction[,3:4],
-                                                   longlat=TRUE)/scaleValue)
-    }
-
-    if(matrixValues(x) == "resistance") {
-      correctionValues <- raster::pointDistance(correction[,1:2],
-                                                correction[,3:4],
-                                                longlat=TRUE)/scaleValue
-    }
-
-    if (type=="r")
-    {
-      rows <- raster::rowFromCell(x,adj[,1]) != raster::rowFromCell(x,adj[,2])
-      #low near the poles
+      adj <- adjacencyFromTransition(x)
+      correction <- cbind(raster::xyFromCell(x,adj[, 1]),
+                          raster::xyFromCell(x,adj[, 2]))
       if(matrixValues(x) == "conductance") {
-        corrFactor <- cos((pi/180) * rowMeans(cbind(correction[rows,2],
-                                                    correction[rows,4])))
+        correctionValues <- 1/(raster::pointDistance(correction[, 1:2], correction[, 3:4], longlat = TRUE) / scaleValue)
       }
 
-      #high near the poles
       if(matrixValues(x) == "resistance") {
-        corrFactor <- 1 / (cos((pi/180) * rowMeans(cbind(correction[rows,2],
-                                                         correction[rows,4]))))
+        correctionValues <- raster::pointDistance(correction[, 1:2],  correction[, 3:4], longlat = TRUE) / scaleValue
       }
 
-      # makes conductance lower in N-S direction towards the poles
-      correctionValues[rows] <- correctionValues[rows] * corrFactor
-    }
-  } else {
-    adj <- adjacencyFromTransition(x)
-    correction <- cbind(raster::xyFromCell(x,adj[,1]),
-                        raster::xyFromCell(x,adj[,2]))
-    if(matrixValues(x) == "conductance") {
-      correctionValues <- 1/(raster::pointDistance(correction[,1:2],
-                                                   correction[,3:4],
-                                                   longlat=FALSE)/scaleValue)
+      if (type == "r") {
+        rows <- raster::rowFromCell(x, adj[, 1]) != raster::rowFromCell(x, adj[, 2])
+        #low near the poles
+        if(matrixValues(x) == "conductance") {
+          corrFactor <- cos((pi/180) * rowMeans(cbind(correction[rows, 2], correction[rows, 4])))
+        }
+
+        #high near the poles
+        if(matrixValues(x) == "resistance") {
+          corrFactor <- 1 / (cos((pi/180) * rowMeans(cbind(correction[rows, 2], correction[rows, 4]))))
+        }
+
+        # makes conductance lower in N-S direction towards the poles
+        correctionValues[rows] <- correctionValues[rows] * corrFactor
+      }
+    } else {
+      adj <- adjacencyFromTransition(x)
+      correction <- cbind(raster::xyFromCell(x, adj[, 1]), raster::xyFromCell(x, adj[, 2]))
+      if(matrixValues(x) == "conductance") {
+        correctionValues <- 1 / (raster::pointDistance(correction[,1:2], correction[, 3:4], longlat = FALSE) / scaleValue)
+      }
+
+      if(matrixValues(x) == "resistance") {
+        correctionValues <- raster::pointDistance(correction[, 1:2], correction[, 3:4], longlat = FALSE) / scaleValue
+      }
     }
 
-    if(matrixValues(x) == "resistance") {
-      correctionValues <- raster::pointDistance(correction[,1:2],
-                                                correction[,3:4],
-                                                longlat=FALSE)/scaleValue
+    i <- as.integer(adj[, 1] - 1)
+    j <- as.integer(adj[, 2] - 1)
+    xv <- as.vector(correctionValues) #check for Inf values!
+    dims <- ncell(x)
+    correctionMatrix <- new("dgTMatrix", i = i, j = j, x = xv, Dim = as.integer(c(dims, dims)))
+    correctionMatrix <- (methods::as(correctionMatrix, "sparseMatrix"))
+    if(is(transitionMatrix(x), "dsCMatrix")) {
+      correctionMatrix <- forceSymmetric(correctionMatrix)
+    }  #isSymmetric?
+
+    if(!multpl) {
+      transitionCorrected <- correctionMatrix * transitionMatrix(x)
+      transitionMatrix(x) <- transitionCorrected
+      return(x)
     }
 
+    if(multpl) {
+      transitionMatrix(x) <- correctionMatrix
+      return(x)
+    }
   }
-  i <- as.integer(adj[,1] - 1)
-  j <- as.integer(adj[,2] - 1)
-  xv <- as.vector(correctionValues) #check for Inf values!
-  dims <- ncell(x)
-  correctionMatrix <- new("dgTMatrix", i = i, j = j, x = xv,
-                          Dim = as.integer(c(dims,dims)))
-  correctionMatrix <- (methods::as(correctionMatrix,"sparseMatrix"))
-  if(is(transitionMatrix(x), "dsCMatrix")){
-    correctionMatrix <- forceSymmetric(correctionMatrix)
-  }  #isSymmetric?
-  if(!multpl)
-  {
-    transitionCorrected <- correctionMatrix * transitionMatrix(x)
-    transitionMatrix(x) <- transitionCorrected
-    return(x)
-  }
-  if(multpl)
-  {
-    transitionMatrix(x) <- correctionMatrix
-    return(x)
-  }
-}
 )
 
