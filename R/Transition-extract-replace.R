@@ -1,13 +1,13 @@
 #' Extracting and replacing: class Transition
-#' 
-#' Methods for functions \code{[} and \code{[<-} for object of 
-#' the class TransitionLayer. 
-#' 
-#' Methods for functions \code{[[} and \code{[[<-} for object of 
+#'
+#' Methods for functions \code{[} and \code{[<-} for object of
+#' the class TransitionLayer.
+#'
+#' Methods for functions \code{[[} and \code{[[<-} for object of
 #' the class TransitionStack.
-#' 
+#'
 #' Also see \code{\link[gdistance]{adjacencyFromTransition}}.
-#' 
+#'
 #' @name Transition-extract-replace
 #' @rdname Transition-extract-replace
 #' @docType methods
@@ -21,18 +21,18 @@
 #' @aliases TransitionStack<-
 #' @aliases transitionMatrix<-
 #' @aliases transitionMatrix<-,TransitionLayer,sparseMatrix-method
-#' 
+#'
 #' @param x an object of class \code{Transition*}
 #' @param value the value to assign
-#' @examples 
+#' @examples
 #' #Create a new raster and set all its values to unity.
-#' r <- raster(nrows=18, ncols=36) 
+#' r <- raster(nrows=18, ncols=36)
 #' r <- setValues(r,rep(1,ncell(r)))
-#' 
+#'
 #' #Create TransitionLayer objects
 #' tr1 <- transition(r,mean,4)
 #' tr2 <- tr1
-#' 
+#'
 #' #Extracting and replacing
 #' tr1[cbind(1:9,1:9)] <- tr2[cbind(1:9,1:9)]
 #' tr1[1:9,1:9] <- tr2[1:9,1:9]
@@ -42,13 +42,13 @@
 #' @exportMethod [
 #' @exportMethod [[<-
 #' @exportMethod [[
-setGeneric("transitionMatrix<-", 
+setGeneric("transitionMatrix<-",
            function(x, value){
              standardGeneric("transitionMatrix<-")
              })
 
-setReplaceMethod("transitionMatrix", 
-                 signature(x = "TransitionLayer", 
+setReplaceMethod("transitionMatrix",
+                 signature(x = "TransitionLayer",
                            value = "sparseMatrix"),
 	function(x, value)
 	{
@@ -66,14 +66,14 @@ setGeneric("transitionMatrix<-", function(x, value) {
   standardGeneric("transitionMatrix<-")
 })
 
-setReplaceMethod ("transitionMatrix", 
-                  signature(x = "TransitionLayer", 
+setReplaceMethod ("transitionMatrix",
+                  signature(x = "TransitionLayer",
                             value = "sparseMatrix"),
                   function(x, value){
                     if(dim(value)[1] != dim(value)[2]){
                       stop("sparse matrix has to be square")
                     }
-                    
+
                     if(dim(value)[1] == ncell(x)){x@transitionMatrix <- value}
                     else
                     {
@@ -91,7 +91,7 @@ setReplaceMethod ("transitionMatrix",
                   }
 )
 
-setMethod("[", signature(x = "TransitionLayer", i="numeric", 
+setMethod("[", signature(x = "TransitionLayer", i="numeric",
                          j="numeric", drop="missing"), function(x,i,j)
                          {
                            tm <- transitionMatrix(x)
@@ -119,7 +119,7 @@ setMethod("[<-", signature(x = "TransitionLayer",
           }
 )
 
-setMethod("[<-", signature(x = "TransitionLayer", 
+setMethod("[<-", signature(x = "TransitionLayer",
                            i="numeric", j="numeric", value="ANY"),
           function(x, i, j, value)
           {
@@ -131,8 +131,8 @@ setMethod("[<-", signature(x = "TransitionLayer",
 )
 
 
-setMethod("[[", signature(x = "TransitionStack", 
-                          i="numeric", j="missing"), 
+setMethod("[[", signature(x = "TransitionStack",
+                          i="numeric", j="missing"),
           function(x,i) {
   if (!(all(i %in% 1:nlayers(x)))){stop("indices should correspond to layers")}
   else
@@ -140,14 +140,14 @@ setMethod("[[", signature(x = "TransitionStack",
     if(length(i)==1)
     {
       result <- new("TransitionLayer", nrows=as.integer(nrow(x)),
-                    ncols = as.integer(ncol(x)), 
+                    ncols = as.integer(ncol(x)),
                     extent = extent(c(xmin(x), xmax(x),
-                                      ymin(x), ymax(x))), 
+                                      ymin(x), ymax(x))),
                     crs=projection(x, asText=FALSE))
       result@transitionMatrix <- x@transition[[i]]@transitionMatrix
       result@transitionCells <- x@transition[[i]]@transitionCells
       result@matrixValues <- x@transition[[i]]@matrixValues
-    }			
+    }
     if(length(i)>1)
     {
       result <- x
@@ -158,8 +158,8 @@ setMethod("[[", signature(x = "TransitionStack",
 }
 )
 
-setMethod("[[<-", signature(x = "TransitionStack", i="numeric", 
-                            j="missing", value="TransitionData"), 
+setMethod("[[<-", signature(x = "TransitionStack", i="numeric",
+                            j="missing", value="TransitionData"),
           function(x,i, value) {
             x@transition[[i]] <- value
             return(x)

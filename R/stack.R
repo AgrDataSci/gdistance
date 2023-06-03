@@ -1,24 +1,24 @@
 #' @aliases stack,TransitionLayer-method
 #' @aliases stack,TransitionStack-method
 #' @author Jacob van Etten
-setMethod("stack", signature(x="TransitionLayer"), function(x, ...) 
+setMethod("stack", signature(x="TransitionLayer"), function(x, ...)
 {
   newStack <- as(x, "TransitionStack")
   objectList <- list(...)
   TData <- .createTData(x, objectList)
   newStack@transition <- TData
-  return(newStack)	
-} 
+  return(newStack)
+}
 )
 
-setMethod("stack", signature(x='TransitionStack'), function(x, ...) 
+setMethod("stack", signature(x='TransitionStack'), function(x, ...)
 {
   newStack <- as(x, "TransitionStack")
   objectList <- list(...)
   TData <- .createTData(x, objectList)
   newStack@transition <- TData
-  return(newStack)	
-} 
+  return(newStack)
+}
 )
 
 .createTData <- function(x, objectList)

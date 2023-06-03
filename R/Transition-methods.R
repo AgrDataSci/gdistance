@@ -1,16 +1,16 @@
 #' Arithmetic and mathematical operations with objects of Transition* classes
-#' 
-#' Standard arithmetic operators for computations with \code{Transition*} 
+#'
+#' Standard arithmetic operators for computations with \code{Transition*}
 #' objects and numeric values. Transition objects must have the same extent
-#' and resolution. All arithmetic and mathematical operations that work on 
-#' the sparse matrices are available for \code{Transition*} objects. 
-#' 
+#' and resolution. All arithmetic and mathematical operations that work on
+#' the sparse matrices are available for \code{Transition*} objects.
+#'
 #' @name ArithMath-methods
 #' @docType methods
 #' @keywords methods
 #' @keywords math
 #' @keywords spatial
-#' 
+#'
 #' @aliases Arith-methods
 #' @aliases Arith,ANY,TransitionLayer-method
 #' @aliases Arith,TransitionLayer,ANY-method
@@ -23,23 +23,23 @@
 #' @aliases Math-methods
 #' @aliases Math,TransitionLayer-method
 #' @aliases Math,TransitionStack-method
-#' 
+#'
 #' @param e1 objects
 #' @param e2 objects
 #' @return a \code{Transition*} object or numeric.
-#' @examples 
+#' @examples
 #' #create a new raster and set all its values to unity.
-#' raster <- raster(nrows=18, ncols=36) 
+#' raster <- raster(nrows=18, ncols=36)
 #' raster <- setValues(raster,rep(1,ncell(raster)))
-#' 
+#'
 #' #create TransitionLayer objects
 #' tr1 <- transition(raster,mean,4)
 #' tr2 <- tr1
-#' 
+#'
 #' #arithmetic operations
 #' tr3 <- tr1 * tr2
 #' tr4 <- tr3 * 4
-#' 
+#'
 #' #mathematical operations
 #' tr5 <- sqrt(tr4)
 #' @author Jacob van Etten
@@ -57,7 +57,7 @@ setMethod("Arith", signature(e1 = "TransitionLayer", e2 = "TransitionLayer"),
 		{
 			if(as(e1, "BasicRaster") == as(e2, "BasicRaster"))
 				{
-					matrix.dsC <- callGeneric(transitionMatrix(e1), 
+					matrix.dsC <- callGeneric(transitionMatrix(e1),
 					                          transitionMatrix(e2))
 					transitionMatrix(e1) <- matrix.dsC
 					e1@transitionCells <- 1:ncell(e1)
@@ -140,7 +140,7 @@ setMethod("Arith", signature(e1 = "TransitionStack", e2 = "ANY"),
 					e1@transition[[i]]@transitionMatrix <- matrix.dsC
 					e1@transition[[i]]@transitionCells <- 1:ncell(e1)
 				}
-				
+
 			}
 			else if(length(e2) == nlayers(e1))
 			{

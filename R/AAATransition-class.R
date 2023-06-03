@@ -1,25 +1,25 @@
 #' Transition classes
-#' 
-#' TransitionLayer and TransitionStack (or \code{Transition*}) are the core 
-#' classes of the package gdistance. They are the main input into the 
+#'
+#' TransitionLayer and TransitionStack (or \code{Transition*}) are the core
+#' classes of the package gdistance. They are the main input into the
 #' functions to calculate distances and routes. An object of the class
 #' TransitionLayer contains two main elements:
-#' 
-#' a. a transition matrix with transition values between connected 
-#'  cells in a raster - an object of class sparseMatrix (package Matrix); 
-#' b. information on the extent, resolution and projection of the underlying 
+#'
+#' a. a transition matrix with transition values between connected
+#'  cells in a raster - an object of class sparseMatrix (package Matrix);
+#' b. information on the extent, resolution and projection of the underlying
 #'  raster - an object of class Raster (package raster).
-#'  
-#' All slots belong to these two elements from other package, 
+#'
+#' All slots belong to these two elements from other package,
 #'  except two additional slots:
 #'  1. slot transitionCells, which is only used internally in the package;
-#'  2. slot matrixValues indicates if the nonzero values of the transition 
+#'  2. slot matrixValues indicates if the nonzero values of the transition
 #'  matrix contains conductance or resistance values.
-#' 
+#'
 #' Class TransitionStack contains one or more transition matrices.
-#' 
+#'
 #' Class Transition is the union of TransitionLayer and TransitionStack.
-#' 
+#'
 #' @name Transition-classes
 #' @aliases TransitionLayer-class
 #' @aliases TransitionStack-class
@@ -37,21 +37,21 @@
 #' @aliases ==,TransitionStack,TransitionStack-method
 #' @keywords classes
 #' @section Objects from the Class:
-#' Objects can be created by calls of the form 
+#' Objects can be created by calls of the form
 #'  new("Transition", nrows, ncols, xmin, xmax, ymin, ymax, projection).
-#' @section  Extends: 
+#' @section  Extends:
 #' Class \code{\linkS4class{Raster}}
-#' @examples 
+#' @examples
 #' showClass("TransitionLayer")
-#' 
+#'
 #' tr <- new("TransitionLayer", nrows=as.integer(36), ncols=as.integer(18),
 #'           extent=extent(c(xmin=-180,xmax=180, ymin=-90,ymax=90)),
 #'           crs=CRS("+proj=longlat +datum=WGS84"))
-#' 
+#'
 #' tr <- new("TransitionLayer",nrows=as.integer(36),ncols=as.integer(18),
 #'           extent=extent(c(xmin=-180, xmax=180, ymin=-90,ymax=90)),
 #'           crs=CRS(""))
-#'           
+#'
 #' @slot transitionMatrix Object of class \code{"sparseMatrix"}
 #' @slot transitionCells Object of class \code{"integer"}
 #' @slot matrixValues Object of class \code{"character"}
@@ -76,7 +76,7 @@ setClass(Class="TransitionData",
              cond1 <- (nrow(object@transitionMatrix) == ncol(object@transitionMatrix))
              cond2 <- (object@matrixValues == "resistance" | object@matrixValues == "conductance")
              cond3 <- length(transitionCells(object)) == object@transitionMatrix@Dim[1]
-             cond <- cond1 & cond2 & cond3 
+             cond <- cond1 & cond2 & cond3
              return(cond)
          }
 )
@@ -97,10 +97,10 @@ setClass(Class="TransitionLayer",
            matrixValues = "conductance"
          ),
          validity = function(object){
-           cond1 <- (nrow(object@transitionMatrix) == ncol(object@transitionMatrix)) 
+           cond1 <- (nrow(object@transitionMatrix) == ncol(object@transitionMatrix))
            cond2 <- (object@matrixValues == "resistance" | object@matrixValues == "conductance")
            cond3 <- length(transitionCells(object)) == object@transitionMatrix@Dim[1]
-           cond <- cond1 & cond2 & cond3 
+           cond <- cond1 & cond2 & cond3
            return(cond)
          }
 )

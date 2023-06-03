@@ -7,17 +7,17 @@
 if (!isGeneric("summary")) {
 	setGeneric("summary", function(object, ...)
 		standardGeneric("summary"))
-}	
+}
 
 #' @exportMethod summary
-setMethod('summary', signature(object='TransitionLayer'), 
+setMethod('summary', signature(object='TransitionLayer'),
 	function(object, ...) {
 		summary(transitionMatrix(object))
 	}
 )
 
 #' @exportMethod summary
-setMethod('summary', signature(object='TransitionStack'), 
+setMethod('summary', signature(object='TransitionStack'),
 	function(object, ...) {
 		n <- nlayers(object)
 		result <- vector("list", length=n)
