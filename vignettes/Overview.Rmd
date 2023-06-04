@@ -436,9 +436,10 @@ First, we read in the data: a map of Europe, the coordinates of the populations 
 
 ```{r gdistance-24}
 Europe <- raster(system.file("external/Europe.grd", package = "gdistance"))
-Europe[is.na(Europe)] <- 0
+
 data(genDist)
 data(popCoord)
+
 pC <- as.matrix(popCoord[c("x", "y")])
 ```
 
@@ -453,6 +454,15 @@ Then we create three geographical distance matrices. The first corresponds to th
 geoDist <- pointDistance(pC, longlat = TRUE)
 geoDist <- as.dist(geoDist)
 Europe <- aggregate(Europe, 3)
+
+# Keep only the largest "clump" and remove patches that cannot be reached.
+# Having disconnected patches might sometimes cause issues with some of the
+# linear algebra calculations.
+# Note that this clump code is not robust to other rasters that will need to identify
+# the correct clump number
+clumps = raster::clump(Europe, directions = 8)
+clumps[clumps[] != 1] <- NA
+Europe = Europe * clumps
 
 tr <- transition(Europe, mean, directions = 8)
 trC <- geoCorrection(tr, "c", scl = TRUE)
