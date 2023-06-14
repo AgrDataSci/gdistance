@@ -160,7 +160,7 @@ setMethod(
     stop("Bad directions", call. = FALSE)
   }
 
-  if (sym) dir <- dir[(length(dir)/2 + 1):length(dir)]
+  if (sym) dir <- dir[1:(length(dir)/2)]
 
   for (r in 1:nrows) {
     vals <- terra::focalValues(data, 3, r, 1)
@@ -170,7 +170,7 @@ setMethod(
       for (d in dir) {
         index <- index + 1
 
-        result[index] <- fun(c(v, vals[c, d]))
+        result[index] <- fun(c(vals[c, d], v))
       }
     }
   }
@@ -213,20 +213,28 @@ setMethod(
 
   if (sym) {
     dir_sym <- dir/2
-    dir_vec <- dir_vec[(dir_sym + 1):dir]
-    offsets <- offsets[(dir_sym + 1):dir]
+    dir_vec <- dir_vec[1:dir_sym]
+    offsets <- offsets[1:dir_sym]
   }
 
-  # Fill out mat_p
+
   mat_p <- integer(ncells + 1)
+  mat_x <- numeric(nedges)
+  mat_i <- integer(nedges)
+
+  index = 0
 
   for (i in 1:length(tr_vals)) {
-    if (is.finite(tr_vals[i])) {
+    if (is.finite(tr_vals[i]) & tr_vals[i] != 0) {
+      index = index + 1
+
       d <- ((i - 1) %% dir_sym) + 1
-      p1 <- ((i - 1) %/% dir_sym) + 1
-      p2 <- p1 + offsets[d]
+      p2 <- ((i - 1) %/% dir_sym) + 1
+      p1 <- p2 + offsets[d]
 
       mat_p[p2 + 1] <- mat_p[p2 + 1] + 1
+      mat_x[index] <- tr_vals[i]
+      mat_i[index] <- p1
     }
   }
 
@@ -234,31 +242,13 @@ setMethod(
     mat_p[i] <- mat_p[i] + mat_p[i - 1]
   }
 
-  mat_p_count <- integer(ncells + 1)
-
-  mat_x <- numeric(nedges)
-  mat_i <- integer(nedges)
-
-  for (i in 1:length(tr_vals)) {
-    if (is.finite(tr_vals[i])) {
-      d <- ((i - 1) %% dir_sym) + 1
-      p1 <- ((i - 1) %/% dir_sym) + 1
-      p2 <- p1 + offsets[d]
-
-      mat_p_count[p2] <- mat_p_count[p2] + 1
-
-      mat_x[mat_p[p2] + mat_p_count[p2]] <- tr_vals[i]
-      mat_i[mat_p[p2] + mat_p_count[p2]] <- p1
-    }
-  }
-
   mat_i <- mat_i - 1
 
-  if(!all(mat_x >= 0)){
+  if (!all(mat_x >= 0)) {
     warning("transition function gives negative values")
   }
 
-  if(sym) {
+  if (sym) {
     mat <- new("dsCMatrix")
   } else {
     mat <- new("dgCMatrix")
