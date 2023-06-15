@@ -228,6 +228,7 @@ setMethod(
     if (is.finite(tr_vals[i]) & tr_vals[i] != 0) {
       index = index + 1
 
+      # TODO modify for rasters that wrap across date line
       d <- ((i - 1) %% dir_sym) + 1
       p2 <- ((i - 1) %/% dir_sym) + 1
       p1 <- p2 + offsets[d]
