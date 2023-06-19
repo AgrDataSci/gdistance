@@ -14,7 +14,7 @@ costDistance(x, fromCoords, toCoords)
 \item{fromCoords}{first set of point locations
 (of \code{SpatialPoints}, matrix or numeric class)}
 
-\item{toCoords}{optional, second set of point 
+\item{toCoords}{optional, second set of point
 locations (of \code{SpatialPoints}, matrix or numeric class)}
 }
 \value{
@@ -24,19 +24,19 @@ distance matrix (S3 class dist or matrix)
 Calculate the least-cost distance between points.
 }
 \details{
-Cost units between cells are defined as the reciprocal 
+Cost units between cells are defined as the reciprocal
  of the values in the transition matrix.
- 
-The function uses Dijkstra's algorithm, as implemented in 
+
+The function uses Dijkstra's algorithm, as implemented in
  the igraph package.
- 
-A projection correction is needed for accuracy in the case 
+
+A projection correction is needed for accuracy in the case
  of grid data for a longlat raster (see function geoCorrection).
 }
 \examples{
 library("raster")
 # create a new raster and set all its values to unity.
-r <- raster(nrows=18, ncols=36) 
+r <- raster(nrows=18, ncols=36)
 r <- setValues(r,runif(ncell(r),0,1))
 
 # create a Transition object from the raster
@@ -60,7 +60,7 @@ costDistance(tr2,sP1,sP2)
 
 }
 \references{
-E.W. Dijkstra. 1959. A note on two problems 
+E.W. Dijkstra. 1959. A note on two problems
  in connexion with graphs. Numerische Mathematik 1, 269 - 271.
 }
 \seealso{

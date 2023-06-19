@@ -9,24 +9,24 @@
 dist object (genDist) and data.frame (popCoord)
 }
 \source{
-Distances calculated from Table S1 in 
-Balaresque et al. (2010). 
+Distances calculated from Table S1 in
+Balaresque et al. (2010).
 Coordinates from Table 1.
 }
 \description{
-genDist: Genetic distances between 23 populations of Y-chromosome 
-haplogroup R1b1b2 in Europe, calculated from haplotype microsatellite 
+genDist: Genetic distances between 23 populations of Y-chromosome
+haplogroup R1b1b2 in Europe, calculated from haplotype microsatellite
 data (see source).
 }
 \details{
-The distance measure used is the negative logarithm of the shared 
+The distance measure used is the negative logarithm of the shared
 proportion of alleles.
 
 popCoord: Geographic coordinates of the same populations.
 }
 \references{
-Balaresque P., et al. 2010. A predominantly Neolithic 
-origin for European paternal lineages. 
+Balaresque P., et al. 2010. A predominantly Neolithic
+origin for European paternal lineages.
 \emph{PLoS Biology} 8(1): e1000285.
 }
 \keyword{datasets}

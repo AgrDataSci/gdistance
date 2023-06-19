@@ -17,18 +17,18 @@ pathInc(x, origin, from, to, theta, weight, ...)
 \arguments{
 \item{x}{transition matrix of class \code{Transition*}}
 
-\item{origin}{coordinates of the origin (one point location, 
+\item{origin}{coordinates of the origin (one point location,
 SpatialPoints, matrix or numeric class)}
 
-\item{from}{coordinates of the destinations 
+\item{from}{coordinates of the destinations
 (SpatialPoints, matrix or numeric class)}
 
 \item{to}{second set of coordinates of the destinations (can be missing)}
 
-\item{theta}{value > 0 and < 20 (randomised shortest paths) or 
+\item{theta}{value > 0 and < 20 (randomised shortest paths) or
 missing (random walk)}
 
-\item{weight}{matrix – Reciprocals of the non-zero values are used as weights. 
+\item{weight}{matrix – Reciprocals of the non-zero values are used as weights.
 If missing, reciprocals of the transition matrix are used.}
 
 \item{...}{additional arguments passed to methods. See Details.}
@@ -37,30 +37,30 @@ If missing, reciprocals of the transition matrix are used.}
 list of dist objects or list of matrices
 }
 \description{
-Calculate the overlap and non-overlap of paths departing from a common origin. 
+Calculate the overlap and non-overlap of paths departing from a common origin.
  Two algorithms are available: random walk and randomised shortest paths.
 }
 \details{
-This is a complex wrapper function that calculates to what extent dispersal 
+This is a complex wrapper function that calculates to what extent dispersal
 routes overlap or do not overlap.
 
-First, the function calculates the trajectories for all "from" and "to" 
-locations, starting from a single "origin" location. These trajectories can 
-either be based on random walks or randomised shortest paths (giving a value 
+First, the function calculates the trajectories for all "from" and "to"
+locations, starting from a single "origin" location. These trajectories can
+either be based on random walks or randomised shortest paths (giving a value
 to theta).
 
-Then, for all unique pairs of trajectories, it calculates the extent to 
-which these trajectories overlap or diverge. These values are given back 
+Then, for all unique pairs of trajectories, it calculates the extent to
+which these trajectories overlap or diverge. These values are given back
 to the user as a list of (distance) matrices.
 
-If only "from" coordinates are given, the function calculates symmetric 
-distance matrices for all combinations of points in "from". If both "from" 
-and "to" coordinates are given, the function calculates a matrix of values 
+If only "from" coordinates are given, the function calculates symmetric
+distance matrices for all combinations of points in "from". If both "from"
+and "to" coordinates are given, the function calculates a matrix of values
 with rows for all locations in "from" and columns for all locations in "to".
 
-Overlap is currently calculated as the minimum values of each pair of 
-trajectories compared. Non-overlap uses the following formula: 
-Nonoverlap = max(0,max(a,b)*(1-min(a,b))-min(a,b)) 
+Overlap is currently calculated as the minimum values of each pair of
+trajectories compared. Non-overlap uses the following formula:
+Nonoverlap = max(0,max(a,b)*(1-min(a,b))-min(a,b))
 (see van Etten and Hijmans 2010). See the last example to learn
 how to use an alternative function.
 }
@@ -111,20 +111,20 @@ pathInc(trR, origin=sP0, from=sP1, weight=ts, functions=list(altoverlap))
 
 }
 \references{
-McRae B.H., B.G. Dickson, and T. Keitt. 2008. 
- Using circuit theory to model connectivity in ecology, 
+McRae B.H., B.G. Dickson, and T. Keitt. 2008.
+ Using circuit theory to model connectivity in ecology,
  evolution, and conservation. Ecology 89:2712-2724.
 
-Saerens M., L. Yen, F. Fouss, and Y. Achbany. 2009. 
- Randomized shortest-path problems: two related models. 
+Saerens M., L. Yen, F. Fouss, and Y. Achbany. 2009.
+ Randomized shortest-path problems: two related models.
  Neural Computation, 21(8):2363-2404.
-  
-van Etten, J., and R.J. Hijmans. 2010. A geospatial modelling 
- approach integrating archaeobotany and genetics to trace the 
+
+van Etten, J., and R.J. Hijmans. 2010. A geospatial modelling
+ approach integrating archaeobotany and genetics to trace the
  origin and dispersal of domesticated plants. PLoS ONE 5(8): e12060.
 }
 \author{
-Jacob van Etten. Implementation of randomised shortest paths 
+Jacob van Etten. Implementation of randomised shortest paths
  based on Matlab code by Marco Saerens.
 }
 \keyword{spatial}

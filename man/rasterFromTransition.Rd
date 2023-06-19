@@ -17,8 +17,8 @@ See details}
 a RasterLayer
 }
 \description{
-Create a RasterLayer from a TransitionLayer with a call to 
-the generic function \code{raster}. The n x n transition matrix of 
+Create a RasterLayer from a TransitionLayer with a call to
+the generic function \code{raster}. The n x n transition matrix of
 the TransitionLayer is transformed to form the values n cells of a raster.
 }
 \details{
@@ -32,13 +32,13 @@ available with the optional argument \code{reduceMethod}):
     \item{NZcolMeans}
     \item{NZrowMeans}
 }
-The latter two methods only take into account the non-zero entries 
+The latter two methods only take into account the non-zero entries
 in the transition matrix.
 The default is NZcolMeans.
 }
 \examples{
 #create a new raster and set all its values to unity.
-r <- raster(nrows=18, ncols=36) 
+r <- raster(nrows=18, ncols=36)
 r <- setValues(r,runif(ncell(r),0,1))
 
 #create a Transition object from the raster

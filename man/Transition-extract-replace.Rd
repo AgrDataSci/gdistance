@@ -22,18 +22,18 @@ transitionMatrix(x) <- value
 \item{value}{the value to assign}
 }
 \description{
-Methods for functions \code{[} and \code{[<-} for object of 
+Methods for functions \code{[} and \code{[<-} for object of
 the class TransitionLayer.
 }
 \details{
-Methods for functions \code{[[} and \code{[[<-} for object of 
+Methods for functions \code{[[} and \code{[[<-} for object of
 the class TransitionStack.
 
 Also see \code{\link[gdistance]{adjacencyFromTransition}}.
 }
 \examples{
 #Create a new raster and set all its values to unity.
-r <- raster(nrows=18, ncols=36) 
+r <- raster(nrows=18, ncols=36)
 r <- setValues(r,rep(1,ncell(r)))
 
 #Create TransitionLayer objects

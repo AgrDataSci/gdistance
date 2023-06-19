@@ -23,17 +23,17 @@
 a TransitionLayer
 }
 \description{
-The following summary methods are available: mean, 
+The following summary methods are available: mean,
  Median, max, min, range, prod, sum, any, all
 }
 \note{
-These methods compute a summary statistic based on cell values of 
- layers in a TransitionStack. The result of these methods is always a 
+These methods compute a summary statistic based on cell values of
+ layers in a TransitionStack. The result of these methods is always a
  single TransitionLayer.
 }
 \examples{
 #Create a new raster and set all its values to unity.
-raster <- raster(nrows=18, ncols=36) 
+raster <- raster(nrows=18, ncols=36)
 raster <- setValues(raster,rep(1,ncell(raster)))
 
 #Create a Transition object from the raster

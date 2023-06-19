@@ -16,7 +16,7 @@ overlap(a, b)
 A matrix object
 }
 \description{
-Special functions to calculate the degree of overlap and 
+Special functions to calculate the degree of overlap and
  nonoverlap between trajectories
 }
 \details{

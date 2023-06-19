@@ -10,10 +10,10 @@ rSPDistance(x, from, to, theta, totalNet = "net", method = 1)
 \arguments{
 \item{x}{\code{TransitionLayer} object}
 
-\item{from}{point locations coordinates (of SpatialPoints, 
+\item{from}{point locations coordinates (of SpatialPoints,
 matrix or numeric class)}
 
-\item{to}{point locations coordinates (of SpatialPoints, 
+\item{to}{point locations coordinates (of SpatialPoints,
 matrix or numeric class)}
 
 \item{theta}{theta is the degree from which the path randomly
@@ -21,7 +21,7 @@ deviates from the shortest path, 0 < theta < 20}
 
 \item{totalNet}{total or net movements between cells}
 
-\item{method}{method 1 (as defined in Saerens et al.) or 
+\item{method}{method 1 (as defined in Saerens et al.) or
 method 2 (a modified version, see below in Details)}
 }
 \value{
@@ -31,14 +31,14 @@ distance matrix (S3 class dist or matrix)
 Calculates the randomized shortest path distance between points.
 }
 \details{
-The function implements the algorithm given by Saerens et al. (2009). 
+The function implements the algorithm given by Saerens et al. (2009).
 
-Method 1 implements the method as it is. 
+Method 1 implements the method as it is.
 Method 2 uses W = exp(-theta * ln(P)).
 }
 \examples{
 #Create a new raster and set all its values to unity.
-r <- raster(nrows=18, ncols=36) 
+r <- raster(nrows=18, ncols=36)
 r <- setValues(r,rep(1,ncell(raster)))
 
 #Create a Transition object from the raster
@@ -53,7 +53,7 @@ rSPDistance(tr, sP1, sP2, 1)
 
 }
 \references{
-Saerens M., L. Yen, F. Fouss, and Y. Achbany. 2009. 
+Saerens M., L. Yen, F. Fouss, and Y. Achbany. 2009.
 Randomized shortest-path problems: two related models.
 \emph{Neural Computation}, 21(8):2363-2404.
 }

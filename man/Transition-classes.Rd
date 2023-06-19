@@ -19,21 +19,21 @@
 \alias{==,TransitionStack,TransitionStack-method}
 \title{Transition classes}
 \description{
-TransitionLayer and TransitionStack (or \code{Transition*}) are the core 
-classes of the package gdistance. They are the main input into the 
+TransitionLayer and TransitionStack (or \code{Transition*}) are the core
+classes of the package gdistance. They are the main input into the
 functions to calculate distances and routes. An object of the class
 TransitionLayer contains two main elements:
 }
 \details{
-a. a transition matrix with transition values between connected 
- cells in a raster - an object of class sparseMatrix (package Matrix); 
-b. information on the extent, resolution and projection of the underlying 
+a. a transition matrix with transition values between connected
+ cells in a raster - an object of class sparseMatrix (package Matrix);
+b. information on the extent, resolution and projection of the underlying
  raster - an object of class Raster (package raster).
- 
-All slots belong to these two elements from other package, 
+
+All slots belong to these two elements from other package,
  except two additional slots:
  1. slot transitionCells, which is only used internally in the package;
- 2. slot matrixValues indicates if the nonzero values of the transition 
+ 2. slot matrixValues indicates if the nonzero values of the transition
  matrix contains conductance or resistance values.
 
 Class TransitionStack contains one or more transition matrices.
@@ -62,12 +62,12 @@ Class Transition is the union of TransitionLayer and TransitionStack.
 
 \section{Objects from the Class}{
 
-Objects can be created by calls of the form 
+Objects can be created by calls of the form
  new("Transition", nrows, ncols, xmin, xmax, ymin, ymax, projection).
 }
 
 \section{Extends}{
- 
+
 Class \code{\linkS4class{Raster}}
 }
 
@@ -81,6 +81,6 @@ tr <- new("TransitionLayer", nrows=as.integer(36), ncols=as.integer(18),
 tr <- new("TransitionLayer",nrows=as.integer(36),ncols=as.integer(18),
           extent=extent(c(xmin=-180, xmax=180, ymin=-90,ymax=90)),
           crs=CRS(""))
-          
+
 }
 \keyword{classes}
