@@ -1,7 +1,7 @@
-gdistance 1.6.3 (2023-06-19)
+gdistance 1.6.4 (2023-06-19)
 =========================
 
-* Optimized the `transition()` function for 4 and 8 directions with user-defined functions. Run time is reduced by 15-20%, and the peak memory consumption is massively reduced.
+* Optimized the `transition()` function for 4 and 8 directions with user-defined functions. Run time is reduced by 10+%, and the peak memory consumption is massively reduced.
 * Updated deprecated usage of the Matrix library.
 * Added unit tests for the `transition()` function.
 * Add workaround (fix?) for `pathInc()` code in Overview vignette.

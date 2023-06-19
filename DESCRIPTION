@@ -1,7 +1,7 @@
 Package: gdistance
 Type: Package
 Title: Distances and Routes on Geographical Grids
-Version: 1.6.3
+Version: 1.6.4
 Authors@R: c(
         person("Jacob", "van Etten", role = c("aut"),
           comment = c(ORCID = "0000-0001-7554-2558")),
