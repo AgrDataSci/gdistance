@@ -167,10 +167,13 @@ setMethod(
 
     for (c in 1:ncols) {
       v <- vals[c, 5]
+
       for (d in dir) {
         index <- index + 1
 
-        result[index] <- fun(c(vals[c, d], v))
+        if (is.finite(v) & is.finite(vals[c, d])) {
+          result[index] <- fun(c(vals[c, d], v))
+        }
       }
     }
   }
@@ -187,7 +190,7 @@ setMethod(
 
   tr_vals <- .tr_vals_simple(x, tr_fun, dir, sym)
 
-  nedges <- sum(is.finite(tr_vals))
+  nedges <- sum(tr_vals != 0)
 
   nrows <- terra::nrow(x)
   ncols <- terra::ncol(x)
@@ -225,7 +228,7 @@ setMethod(
   index = 0
 
   for (i in 1:length(tr_vals)) {
-    if (is.finite(tr_vals[i]) & tr_vals[i] != 0) {
+    if (tr_vals[i] != 0) {
       index = index + 1
 
       # TODO modify for rasters that wrap across date line

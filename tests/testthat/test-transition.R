@@ -2,7 +2,8 @@ context("transition")
 
 fun_list = list(
   function(x) 1/mean(x), # Symmetric
-  function(x) max(x) - x[1] + x[2] # Asymmetric
+  function(x) max(x) - x[1] + x[2], # Asymmetric
+  function(x) 1
 )
 
 # TODO implement lonlat tests
@@ -46,6 +47,7 @@ for (test in testlist) {
       expect_identical(trmat, transitionMatrix(tr_old))
 
       # TODO compare against manually calculated values
+      # TODO validate that i and p make sense
     })
 
 
