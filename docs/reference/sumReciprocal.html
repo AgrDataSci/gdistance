@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.4</span>
       </span>
     </div>
 
@@ -84,34 +84,45 @@
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>To calculate the total resistance of two resistors that are serially 
+    <p>To calculate the total resistance of two resistors that are serially
  connected, we should add their resistance values. However, if we work
- with conductance values, we need to take the reciprocal of the summed 
- reciprocals of the conductance values. This function does that when 
- adding two TransitionLayers with conductance values 
+ with conductance values, we need to take the reciprocal of the summed
+ reciprocals of the conductance values. This function does that when
+ adding two TransitionLayers with conductance values
  (<code>matrixValues(tr) == "conductance"</code>).</p>
-<p>For a TransitionLayer with resistance values 
+<p>For a TransitionLayer with resistance values
  (<code>matrixValues(tr) == "resistance"</code>), the function will not take
- reciprocals for that object, but will still take a reciprocal for the 
+ reciprocals for that object, but will still take a reciprocal for the
  final product (which will consequently have conductance values).</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co">#Create a new raster and set all its values to unity.</span></span>
-<span><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">18</span>, ncols<span class="op">=</span><span class="fl">36</span><span class="op">)</span> </span>
-<span><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/setValues.html" class="external-link">setValues</a></span><span class="op">(</span><span class="va">raster</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">raster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#Create TransitionLayer objects</span></span>
-<span><span class="va">tr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">raster</span>,<span class="va">mean</span>,<span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">tr2</span> <span class="op">&lt;-</span> <span class="va">tr1</span></span>
-<span><span class="fu"><a href="Transition-slots.html">matrixValues</a></span><span class="op">(</span><span class="va">tr1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#Set one to resistance</span></span>
-<span><span class="fu"><a href="Transition-slots.html">matrixValues</a></span><span class="op">(</span><span class="va">tr2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"resistance"</span></span>
-<span></span>
-<span><span class="co">#Sum the two objects</span></span>
-<span><span class="fu">sumReciprocal</span><span class="op">(</span><span class="va">tr1</span>,<span class="va">tr2</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#Create a new raster and set all its values to unity.</span></span></span>
+<span class="r-in"><span><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">18</span>, ncols<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/setValues.html" class="external-link">setValues</a></span><span class="op">(</span><span class="va">raster</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">raster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Create TransitionLayer objects</span></span></span>
+<span class="r-in"><span><span class="va">tr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">raster</span>,<span class="va">mean</span>,<span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The extent and CRS indicate this raster is a global lat/lon raster. This means that transitions going off of the East or West edges will 'wrap' to the opposite edge.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Global lat/lon rasters are not supported under new optimizations for 4 and 8 directions with custom transition functions. Falling back to old method.</span>
+<span class="r-in"><span><span class="va">tr2</span> <span class="op">&lt;-</span> <span class="va">tr1</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="Transition-slots.html">matrixValues</a></span><span class="op">(</span><span class="va">tr1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "conductance"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Set one to resistance</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="Transition-slots.html">matrixValues</a></span><span class="op">(</span><span class="va">tr2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"resistance"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Sum the two objects</span></span></span>
+<span class="r-in"><span><span class="fu">sumReciprocal</span><span class="op">(</span><span class="va">tr1</span>,<span class="va">tr2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class      : TransitionLayer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 18, 36, 648  (nrow, ncol, ncell)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 10, 10  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> values      : conductance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> matrix class: dsCMatrix </span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -121,11 +132,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Jacob van Etten, Kauê de Sousa.</p>
+  <p></p><p>Developed by Jacob van Etten, Andrew Marx.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
