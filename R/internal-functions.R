@@ -11,18 +11,18 @@
 	if (!is.matrix(Coords) & is.numeric(Coords)) {
 		if (length(Coords) == 2) {
 		  Coords <- t(as.matrix(Coords))
-		} 
-		else{stop("coordinates given as a vector, 
+		}
+		else{stop("coordinates given as a vector,
 		          but the vector does not have a length of two")}
 	}
 	#if (class(Coords) == "matrix") {
 	if(is.matrix(Coords)) {
 	  #if (!(ncol(Coords) == 2)) {
 		if(dim(Coords)[[2]] != 2) {
-		stop("coordinates given as a matrix,", 
+		stop("coordinates given as a matrix,",
 		     " but the matrix does not have two columns")
 		}
-	}	
+	}
 
 	if(inherits(Coords, "SpatialPoints")) {
 		Coords <- sp::coordinates(Coords)
@@ -40,10 +40,10 @@
 .connected.components <- function(x)
 {
 	adj.graph <- igraph::graph.adjacency(transitionMatrix(x))
-	
-	clustermembership <- cbind(1:ncell(x), 
+
+	clustermembership <- cbind(1:ncell(x),
 	                           as.integer(igraph::clusters(adj.graph)$membership) + 1)
-	
+
 	return(clustermembership)
 }
 
@@ -53,16 +53,16 @@
 #' @param Lr a Lr object
 #' @param A an A object
 #' @param n a n object
-#' @param indexFrom the class 
+#' @param indexFrom the class
 #' @param indexTo the class to coerce
 #' @return current components
 #' @examples
 #' # Write example
 #' @noRd
-.current <- function(L, Lr, A, n, indexFrom, indexTo) 
+.current <- function(L, Lr, A, n, indexFrom, indexTo)
 {
   # This should avoid too big floating points as "Voltage differences"
-  C <- 1e-300 * n 
+  C <- 1e-300 * n
 	e <- matrix(0, ncol=1, nrow=n)
 	e[indexFrom,] <- C
  	e[indexTo,] <- -C
@@ -73,7 +73,7 @@
 	V2 <- t(t(A) * Lplusallrows)
 	V <- abs(V1 - V2)
 	#I = V * Conductance
-	Current <- colSums(V * -L)/2 
+	Current <- colSums(V * -L)/2
 	Current[indexFrom] <- 1
 	Current[indexTo] <- 1
 	return(Current)
@@ -85,7 +85,7 @@
 #' @param Lr a Lr object
 #' @param A an A object
 #' @param n a n object
-#' @param indexFrom the class 
+#' @param indexFrom the class
 #' @param indexTo the class to coerce
 #' @return current components
 #' @examples
@@ -97,7 +97,7 @@
 	lt <- length(indexTo)
 	C <- 1e-300 * n
 	# This should avoid too big floating points as "Voltage differences"
-	Cf <- C / lf 
+	Cf <- C / lf
 	Ct <- C / lt
 	e <- matrix(0, ncol=1, nrow=n)
 	e[indexFrom,] <- Cf
@@ -109,7 +109,7 @@
 	V2 <- t(t(A) * Lplusallrows)
 	V <- abs(V1 - V2)
 	#I = V * Conductance
-	Current <- colSums(V * -L) / 2 
+	Current <- colSums(V * -L) / 2
 	Current[indexFrom] <- 1
 	Current[indexTo] <- 1
 	return(Current)
@@ -121,16 +121,16 @@
 #' @param Lr a Lr object
 #' @param A an A object
 #' @param n a n object
-#' @param indexFrom the class 
+#' @param indexFrom the class
 #' @param indexTo the class to coerce
 #' @return potential
 #' @examples
 #' # Write example
 #' @noRd
-.potential <- function(L, Lr, A, n, indexFrom, indexTo) 
+.potential <- function(L, Lr, A, n, indexFrom, indexTo)
 {
   # This should avoid too big floating points as "Voltage differences"
-  C <- 1e-300 * n 
+  C <- 1e-300 * n
 	e <- matrix(0, ncol=1, nrow=n)
 	e[indexFrom,] <- C
  	e[indexTo,] <- -C
@@ -149,17 +149,17 @@
 #' @param Lr a Lr object
 #' @param A an A object
 #' @param n a n object
-#' @param indexFrom the class 
+#' @param indexFrom the class
 #' @param indexTo the class to coerce
 #' @param index the index
 #' @return current M
 #' @examples
 #' # Write example
 #' @noRd
-.currentM <- function(L, Lr, A, n, indexFrom, indexTo, index) 
+.currentM <- function(L, Lr, A, n, indexFrom, indexTo, index)
 {
   # This should avoid too big floating points as "Voltage differences"
-  C <- 1e-300 * n 
+  C <- 1e-300 * n
 	e <- matrix(0, ncol=1, nrow=n)
 	e[indexFrom,] <- C
  	e[indexTo,] <- -C
@@ -170,7 +170,7 @@
 	V2 <- t(t(A) * Lplusallrows)
 	V <- abs(V1 - V2)
 	# I = V * Conductance
-	Current <- V[index] * -L[index] 
+	Current <- V[index] * -L[index]
 	return(Current)
 }
 
@@ -181,14 +181,14 @@
 #' @examples
 #' # Write example
 #' @noRd
-.Laplacian <- function(x) 
+.Laplacian <- function(x)
 {
 	Laplacian <- Matrix::Diagonal(x = colSums(
 	  transitionMatrix(x, inflate=FALSE))
 	  ) - transitionMatrix(x, inflate=FALSE)
-	
+
 	Laplacian <- methods::as(Laplacian, "symmetricMatrix")
-	
+
 	return(Laplacian)
 }
 
@@ -206,7 +206,7 @@
 	return(x)
 }
 
-#' Determine place in dist vector given place in dist matrix 
+#' Determine place in dist vector given place in dist matrix
 #' -- from gdistanalyst
 #'
 #' @param i a i object
@@ -217,13 +217,13 @@
 #' # Write example
 #' @noRd
 .distIndex <- function(i,j,n){
-  
+
   n*(j-1) - j*(j-1)/2 + i-j
 
 }
 
 #' Determine place in dist matrix given place in dist vector
-#' 
+#'
 #' from gdistanalyst -- should be possible speed up!
 #'
 #' @param i a i object
@@ -244,3 +244,23 @@
 }
 
 
+#' Determine if raster is a global lon/lat raster that "wraps" in the East-West direction
+#'
+#' Function copied from the raster package (GPL3)
+#' https://github.com/rspatial/raster/blob/263530499eefdb2d4f07f40af1ce7c9364d2fcc4/R/isLonLat.R#L8
+#'
+#' @param x Raster* object
+#' @return logical
+#' @noRd
+.isGlobalLonLat <- function(x) {
+  res <- FALSE
+  tolerance <- 0.1
+  scale <- xres(x)
+  if (isTRUE(all.equal(xmin(x), -180, tolerance = tolerance, scale = scale)) &
+      isTRUE(all.equal(xmax(x),  180, tolerance = tolerance, scale = scale))) {
+    if (couldBeLonLat(x, warnings = FALSE)) {
+      res <- TRUE
+    }
+  }
+  res
+}

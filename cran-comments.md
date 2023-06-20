@@ -1,7 +1,3 @@
-## 1.6.2 (Resubmission)
+## 1.6.4 (Resubmission)
 
-### CRAN comment
-
-> Package CITATION file contains call(s) to old-style citEntry().  Please use bibentry() instead.
-
-Fixed.
+Fix bug that caused reverse dependency check to fail

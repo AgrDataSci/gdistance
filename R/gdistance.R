@@ -7,13 +7,13 @@
 #' @seealso
 #'\strong{Useful links:}
 #' \itemize{
-#' \item{Package's paper: 
+#' \item{Package's paper:
 #'  \doi{https://doi.org/10.18637/jss.v076.i13}}
-#' \item{Development repository: 
+#' \item{Development repository:
 #'  \url{https://github.com/AgrDataSci/gdistance}}
-#' \item{Static documentation: 
+#' \item{Static documentation:
 #'  \url{https://github.com/AgrDataSci/gdistance}}
-#' \item{Report bugs: 
+#' \item{Report bugs:
 #'  \url{https://github.com/AgrDataSci/gdistance/issues}}
 #' }
 "_PACKAGE"

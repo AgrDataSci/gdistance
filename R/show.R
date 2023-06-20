@@ -1,7 +1,7 @@
 #' @aliases show,TransitionLayer-method
 #' @aliases show,TransitionStack-method
 #' @author Jacob van Etten
-#' @exportMethod show 
+#' @exportMethod show
 setMethod("show" , "TransitionLayer",
            function(object) {
              callNextMethod(object)
@@ -11,11 +11,11 @@ setMethod("show" , "TransitionLayer",
            )
 
 
-#' @exportMethod show 
+#' @exportMethod show
 setMethod("show" , "TransitionStack",
            function(object) {
              callNextMethod(object)
-             cat("nlayers      :", nlayers(object), "\n")              
+             cat("nlayers      :", nlayers(object), "\n")
              #show something about the layers if layers <=5
              #cat("values      :", matrixValues(x), "\n")
              #cat("matrix class:", class(transitionMatrix(x)), "\n")

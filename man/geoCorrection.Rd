@@ -11,10 +11,10 @@ geoCorrection(x, type, ...)
 \arguments{
 \item{x}{object of class \code{Transition*}}
 
-\item{type}{type of correction: "c", "r", or missing 
+\item{type}{type of correction: "c", "r", or missing
 (only required for lonlat, see Details)}
 
-\item{...}{additional arguments passed to methods. \code{multpl} with 
+\item{...}{additional arguments passed to methods. \code{multpl} with
 correction factor (\code{TRUE}) or corrected values (\code{FALSE}, the default).
 \code{scl} scale the correction values (default is \code{FALSE})}
 }
@@ -22,41 +22,41 @@ correction factor (\code{TRUE}) or corrected values (\code{FALSE}, the default).
 a 'Transition*' object
 }
 \description{
-Correct 'TransitionLayer' objects taking into account 
+Correct 'TransitionLayer' objects taking into account
  local distances
 }
 \details{
-Geographic correction is necessary for all objects of the 
- class Transition that are either: 
- (1) based on a grid in a geographic (lonlat) projection 
-  and covering a large area; 
+Geographic correction is necessary for all objects of the
+ class Transition that are either:
+ (1) based on a grid in a geographic (lonlat) projection
+  and covering a large area;
  (2) made with directions > 4.
 
-The function will correct for map distortion, as well as for diagonal 
- connections between grid cells (which cover a longer distance than vertical 
+The function will correct for map distortion, as well as for diagonal
+ connections between grid cells (which cover a longer distance than vertical
  or horizontal connections).
 
-When working with lonlat grids, users should also anticipate whether they 
- will use methods based on either least-cost or random walks, and set the 
- type argument accordingly. In the case of least-cost distances, the 
- correction is only done in East-West direction. In the case of random walks 
+When working with lonlat grids, users should also anticipate whether they
+ will use methods based on either least-cost or random walks, and set the
+ type argument accordingly. In the case of least-cost distances, the
+ correction is only done in East-West direction. In the case of random walks
  there should be an additional correction which reduces the conductance in
  North-South direction (\code{type="r"}).
 
-The correction is done by dividing conductance values by the inter-cell 
- distance. Distances are calculated as great-circle distances for lonlat 
+The correction is done by dividing conductance values by the inter-cell
+ distance. Distances are calculated as great-circle distances for lonlat
  grids (see function \code{[raster]{isLonLat}}) and Euclidean distances for all other grids.
 
-In the case of randomised shortest paths, the need for correction is 
-somewhat in between these two correction methods. We have not developed 
+In the case of randomised shortest paths, the need for correction is
+somewhat in between these two correction methods. We have not developed
 an analytical solution for this problem yet. With very low values for theta,
-you may choose the correction for random walks, and for high values the one for 
-least-cost paths. Users who want to work with intermediate values of theta are 
+you may choose the correction for random walks, and for high values the one for
+least-cost paths. Users who want to work with intermediate values of theta are
 encouraged to experiment with different solutions.
 
-The values are scaled to get values near 1 if the argument \code{scl} is set to 
+The values are scaled to get values near 1 if the argument \code{scl} is set to
  TRUE. This is desirable for subsequent calculations involving random walk
- calculations. Values are divided by the W-E inter-cell distance (at the 
+ calculations. Values are divided by the W-E inter-cell distance (at the
  centre of the grid).
 }
 \examples{

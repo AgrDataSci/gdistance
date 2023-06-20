@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.4</span>
       </span>
     </div>
 
@@ -78,7 +78,7 @@
 
 
 <dt>toCoords</dt>
-<dd><p>optional, second set of point 
+<dd><p>optional, second set of point
 locations (of <code>SpatialPoints</code>, matrix or numeric class)</p></dd>
 
 </dl></div>
@@ -90,16 +90,16 @@ locations (of <code>SpatialPoints</code>, matrix or numeric class)</p></dd>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Cost units between cells are defined as the reciprocal 
- of the values in the transition matrix.</p> 
-<p>The function uses Dijkstra's algorithm, as implemented in 
- the igraph package.</p> 
-<p>A projection correction is needed for accuracy in the case 
+    <p>Cost units between cells are defined as the reciprocal
+ of the values in the transition matrix.</p>
+<p>The function uses Dijkstra's algorithm, as implemented in
+ the igraph package.</p>
+<p>A projection correction is needed for accuracy in the case
  of grid data for a longlat raster (see function geoCorrection).</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>E.W. Dijkstra. 1959. A note on two problems 
+    <p>E.W. Dijkstra. 1959. A note on two problems
  in connexion with graphs. Numerische Mathematik 1, 269 - 271.</p>
     </div>
     <div id="see-also">
@@ -114,30 +114,50 @@ locations (of <code>SpatialPoints</code>, matrix or numeric class)</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://rspatial.org/raster" class="external-link">"raster"</a></span><span class="op">)</span></span>
-<span><span class="co"># create a new raster and set all its values to unity.</span></span>
-<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">18</span>, ncols<span class="op">=</span><span class="fl">36</span><span class="op">)</span> </span>
-<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/setValues.html" class="external-link">setValues</a></span><span class="op">(</span><span class="va">r</span>,<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># create a Transition object from the raster</span></span>
-<span><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">r</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,<span class="fl">8</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># asymmetric</span></span>
-<span><span class="va">ncf</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">tr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">ncf</span>,<span class="fl">8</span>, symm<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># create two sets of coordinates</span></span>
-<span><span class="va">sP1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">65</span>,<span class="fl">5</span>,<span class="op">-</span><span class="fl">65</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">55</span>,<span class="fl">35</span>,<span class="op">-</span><span class="fl">35</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">sP2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">15</span>,<span class="op">-</span><span class="fl">40</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">20</span>,<span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># from and to identical</span></span>
-<span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr</span>,<span class="va">sP1</span><span class="op">)</span></span>
-<span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr2</span>,<span class="va">sP1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># from and to different</span></span>
-<span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr</span>,<span class="va">sP1</span>,<span class="va">sP2</span><span class="op">)</span></span>
-<span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr2</span>,<span class="va">sP1</span>,<span class="va">sP2</span><span class="op">)</span></span>
-<span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://rspatial.org/raster" class="external-link">"raster"</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># create a new raster and set all its values to unity.</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">18</span>, ncols<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/setValues.html" class="external-link">setValues</a></span><span class="op">(</span><span class="va">r</span>,<span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create a Transition object from the raster</span></span></span>
+<span class="r-in"><span><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">r</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,<span class="fl">8</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The extent and CRS indicate this raster is a global lat/lon raster. This means that transitions going off of the East or West edges will 'wrap' to the opposite edge.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Global lat/lon rasters are not supported under new optimizations for 4 and 8 directions with custom transition functions. Falling back to old method.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># asymmetric</span></span></span>
+<span class="r-in"><span><span class="va">ncf</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">tr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">ncf</span>,<span class="fl">8</span>, symm<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The extent and CRS indicate this raster is a global lat/lon raster. This means that transitions going off of the East or West edges will 'wrap' to the opposite edge.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Global lat/lon rasters are not supported under new optimizations for 4 and 8 directions with custom transition functions. Falling back to old method.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create two sets of coordinates</span></span></span>
+<span class="r-in"><span><span class="va">sP1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">65</span>,<span class="fl">5</span>,<span class="op">-</span><span class="fl">65</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">55</span>,<span class="fl">35</span>,<span class="op">-</span><span class="fl">35</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sP2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">15</span>,<span class="op">-</span><span class="fl">40</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">20</span>,<span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># from and to identical</span></span></span>
+<span class="r-in"><span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr</span>,<span class="va">sP1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          1        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.653010         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.917342 2.753792</span>
+<span class="r-in"><span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr2</span>,<span class="va">sP1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          [,1]      [,2]     [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   0.0000  6.245795 18.98641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 114.7071  0.000000 14.30999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 127.7512 14.912284  0.00000</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># from and to different</span></span></span>
+<span class="r-in"><span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr</span>,<span class="va">sP1</span>,<span class="va">sP2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          [,1]      [,2]     [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.037957 1.4737797 2.695152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 2.681768 0.8699277 1.639629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 4.935565 2.4718311 1.880000</span>
+<span class="r-in"><span><span class="fu">costDistance</span><span class="op">(</span><span class="va">tr2</span>,<span class="va">sP1</span>,<span class="va">sP2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.857573  9.881818 15.080932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  6.188271  5.851768 10.404515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 20.089880 15.020950  4.227604</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -147,11 +167,11 @@ locations (of <code>SpatialPoints</code>, matrix or numeric class)</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Jacob van Etten, Kauê de Sousa.</p>
+  <p></p><p>Developed by Jacob van Etten, Andrew Marx.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

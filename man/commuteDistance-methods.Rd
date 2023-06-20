@@ -3,45 +3,41 @@
 \name{commuteDistance}
 \alias{commuteDistance}
 \alias{commuteDistance,TransitionLayer,Coords-method}
-\title{Commute-time distance
- 
-Calculates the resistance distance between points.}
+\title{Commute-time distance}
 \usage{
 commuteDistance(x, coords)
 }
 \arguments{
 \item{x}{object of class \code{TransitionLayer}}
 
-\item{coords}{point locations coordinates 
+\item{coords}{point locations coordinates
 (of SpatialPoints, matrix or numeric class)}
 }
 \value{
 distance matrix (S3 class dist or matrix)
 }
 \description{
-Commute-time distance
- 
 Calculates the resistance distance between points.
 }
 \details{
-This function calculates the expected random-walk commute 
- time between nodes in a graph. It is defined as the effective 
- distance (resistance distance) between the selected nodes multiplied 
- by the volume of the graph, which is the sum of the conductance 
- weights of all the edges in the graph (Chandra et al. 1997). The 
- result represents the average number of steps that is needed to 
+This function calculates the expected random-walk commute
+ time between nodes in a graph. It is defined as the effective
+ distance (resistance distance) between the selected nodes multiplied
+ by the volume of the graph, which is the sum of the conductance
+ weights of all the edges in the graph (Chandra et al. 1997). The
+ result represents the average number of steps that is needed to
  commute between the nodes during a random walk.
 
 The function implements the algorithm given by Fouss et al. (2007).
 
-Before calculating commute-time distances from a \code{TransitionLayer} 
- object, see if you need to apply the function 
+Before calculating commute-time distances from a \code{TransitionLayer}
+ object, see if you need to apply the function
  \code{\link{geoCorrection}}
 }
 \examples{
 library("raster")
 # Create a new raster and set all its values to unity.
-r <- raster(nrows=18, ncols=36) 
+r <- raster(nrows=18, ncols=36)
 r <- setValues(r,rep(1,ncell(raster)))
 
 #Create a Transition object from the raster
@@ -57,13 +53,13 @@ commuteDistance(tr, sP1)
 
 }
 \references{
-Chandra, A.K., Raghavan, P., Ruzzo, W.L., Smolensy, R. & Tiwari, P. 1996. 
- The electrical resistance of a graph captures its commute and cover times. 
+Chandra, A.K., Raghavan, P., Ruzzo, W.L., Smolensy, R. & Tiwari, P. 1996.
+ The electrical resistance of a graph captures its commute and cover times.
  Computational Complexity, 6(4), 312-340.
 
-Fouss, F., Pirotte, A., Renders, J.-M. & Saerens, M. 2007. 
- Random-walk computation of similarities between nodes of a 
- graph with application to collaborative recommendation. IEEE 
+Fouss, F., Pirotte, A., Renders, J.-M. & Saerens, M. 2007.
+ Random-walk computation of similarities between nodes of a
+ graph with application to collaborative recommendation. IEEE
  Transactions on Knowledge and Data Engineering, 19(3), 355-369.
 
 McRae, B.H. 2006. Isolation by resistance. Evolution 60(8), 1551-1561.

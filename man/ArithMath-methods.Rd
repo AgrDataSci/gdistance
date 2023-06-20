@@ -27,14 +27,14 @@
 a \code{Transition*} object or numeric.
 }
 \description{
-Standard arithmetic operators for computations with \code{Transition*} 
+Standard arithmetic operators for computations with \code{Transition*}
 objects and numeric values. Transition objects must have the same extent
-and resolution. All arithmetic and mathematical operations that work on 
+and resolution. All arithmetic and mathematical operations that work on
 the sparse matrices are available for \code{Transition*} objects.
 }
 \examples{
 #create a new raster and set all its values to unity.
-raster <- raster(nrows=18, ncols=36) 
+raster <- raster(nrows=18, ncols=36)
 raster <- setValues(raster,rep(1,ncell(raster)))
 
 #create TransitionLayer objects

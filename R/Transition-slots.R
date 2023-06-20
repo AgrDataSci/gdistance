@@ -1,7 +1,7 @@
 #' Extract or change elements of Transition* objects
-#' 
+#'
 #' These functions are to be used to access slots of Transition* objects.
-#' 
+#'
 #' @name Transition-slots
 #' @rdname Transition-slots
 #' @docType methods
@@ -24,10 +24,10 @@
 #' @aliases matrixValues<-,TransitionStack,character-method
 #' @aliases transitionData,TransitionLayer-method
 #' @aliases transitionData,TransitionStack-method
-#' 
+#'
 #' @param x object of class \code{Transition*}
 #' @param inflate logical (default is \code{TRUE})
-#' 
+#'
 #' @exportMethod transitionMatrix
 #' @exportMethod transitionCells
 #' @exportMethod matrixValues
@@ -39,7 +39,7 @@ setGeneric("transitionMatrix", function(x, inflate) {
 })
 
 setMethod("transitionMatrix",
-          signature(x = "TransitionLayer", 
+          signature(x = "TransitionLayer",
                     inflate="missing"),
           function(x)
           {
@@ -47,7 +47,7 @@ setMethod("transitionMatrix",
           }
 )
 
-setMethod("transitionMatrix", 
+setMethod("transitionMatrix",
           signature(x = "TransitionLayer",
                     inflate="logical"),
           function(x, inflate)
@@ -56,8 +56,8 @@ setMethod("transitionMatrix",
           }
 )
 
-setMethod("transitionMatrix", 
-          signature(x = "TransitionData", 
+setMethod("transitionMatrix",
+          signature(x = "TransitionData",
                     inflate="missing"),
           function(x)
           {
@@ -105,12 +105,12 @@ setGeneric("matrixValues", function(x) {
   standardGeneric("matrixValues")
   })
 
-setMethod("matrixValues", 
+setMethod("matrixValues",
            signature(x = "TransitionLayer"),
            function(x){x@matrixValues}
 )
 
-setMethod("matrixValues", 
+setMethod("matrixValues",
            signature(x = "TransitionStack"),
            function(x){stop("not implemented yet")}
 )
@@ -119,10 +119,10 @@ setGeneric("matrixValues<-", function(x, value) {
   standardGeneric("matrixValues<-")
 })
 
-setReplaceMethod ("matrixValues", 
+setReplaceMethod ("matrixValues",
                   signature(x = "TransitionLayer", value = "character"),
                   function(x, value){
-                    if (value == "resistance" | value == "conductance") 
+                    if (value == "resistance" | value == "conductance")
                     {
                       x@matrixValues <- value
                       return(x)
@@ -131,10 +131,10 @@ setReplaceMethod ("matrixValues",
                   }
 )
 
-setMethod("nlayers", signature(x="TransitionStack"), 
+setMethod("nlayers", signature(x="TransitionStack"),
           function(x)
           {
-            return(length(x@transition)) 
+            return(length(x@transition))
           }
 )
 

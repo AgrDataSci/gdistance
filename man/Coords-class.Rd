@@ -6,9 +6,10 @@
 \alias{Coords-class}
 \title{Coords class}
 \description{
-This is a class union, providing a convenient class for 
+This is a class union, providing a convenient class for
  coordinates in several formats.
- 
+}
+\details{
 The class accepts coordinates in any of the following formats:
  1. SpatialPoints
  2. two-columned matrix

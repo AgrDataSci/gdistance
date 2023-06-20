@@ -19,19 +19,19 @@ an object of class \code{TransitionLayer}
 Normalize the transition matrix.
 }
 \details{
-argument \code{method} passed through \code{...} 
+argument \code{method} passed through \code{...}
  a character for the normalization method
- the default is 'row' users can set the optional method argument 
+ the default is 'row' users can set the optional method argument
  to either "col" or "symm"
 
-Normalization of the weighted adjacency matrix in the Transition* object. 
- Matrix values are divided by their respective row-sums, column-sums, 
- or the product of the square-roots of both (symmetric normalization). 
- 
-The default  \code{method} is row-normalization. To use the other normalization 
- methods, users can set the optional \code{method} argument 
- to either "col" or "symm". 
- 
+Normalization of the weighted adjacency matrix in the Transition* object.
+ Matrix values are divided by their respective row-sums, column-sums,
+ or the product of the square-roots of both (symmetric normalization).
+
+The default  \code{method} is row-normalization. To use the other normalization
+ methods, users can set the optional \code{method} argument
+ to either "col" or "symm".
+
 For random walk calculations a symmetric matrix is needed (method = "symm").
 }
 \examples{
@@ -46,11 +46,11 @@ normalize(tr, method="symm")
 
 }
 \references{
-von Luxburg, U. 2007. A tutorial on spectral clustering. 
- Statistics and Computing 17(4), 395-416. 
+von Luxburg, U. 2007. A tutorial on spectral clustering.
+ Statistics and Computing 17(4), 395-416.
  \doi{https://doi.org/10.1007/s11222-007-9033-z}
 
-Chung, F. 1997. Spectral Graph Theory. Conference Board of 
+Chung, F. 1997. Spectral Graph Theory. Conference Board of
  the Mathematical Sciences, Washington.
 }
 \author{

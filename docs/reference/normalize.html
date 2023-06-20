@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdistance</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.4</span>
       </span>
     </div>
 
@@ -86,24 +86,24 @@
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>argument <code>method</code> passed through <code>...</code> 
+    <p>argument <code>method</code> passed through <code>...</code>
  a character for the normalization method
- the default is 'row' users can set the optional method argument 
+ the default is 'row' users can set the optional method argument
  to either "col" or "symm"</p>
-<p>Normalization of the weighted adjacency matrix in the Transition* object. 
- Matrix values are divided by their respective row-sums, column-sums, 
- or the product of the square-roots of both (symmetric normalization).</p> 
-<p>The default  <code>method</code> is row-normalization. To use the other normalization 
- methods, users can set the optional <code>method</code> argument 
- to either "col" or "symm".</p> 
+<p>Normalization of the weighted adjacency matrix in the Transition* object.
+ Matrix values are divided by their respective row-sums, column-sums,
+ or the product of the square-roots of both (symmetric normalization).</p>
+<p>The default  <code>method</code> is row-normalization. To use the other normalization
+ methods, users can set the optional <code>method</code> argument
+ to either "col" or "symm".</p>
 <p>For random walk calculations a symmetric matrix is needed (method = "symm").</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>von Luxburg, U. 2007. A tutorial on spectral clustering. 
- Statistics and Computing 17(4), 395-416. 
+    <p>von Luxburg, U. 2007. A tutorial on spectral clustering.
+ Statistics and Computing 17(4), 395-416.
  <a href="https://doi.org/10.1007/s11222-007-9033-z" class="external-link">doi:10.1007/s11222-007-9033-z</a></p>
-<p>Chung, F. 1997. Spectral Graph Theory. Conference Board of 
+<p>Chung, F. 1997. Spectral Graph Theory. Conference Board of
  the Mathematical Sciences, Washington.</p>
     </div>
     <div id="author">
@@ -113,15 +113,32 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://rspatial.org/raster" class="external-link">"raster"</a></span><span class="op">)</span></span>
-<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">36</span>,nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span>
-<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/setValues.html" class="external-link">setValues</a></span><span class="op">(</span><span class="va">r</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">mean</span>, directions<span class="op">=</span><span class="fl">8</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">normalize</span><span class="op">(</span><span class="va">tr</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">normalize</span><span class="op">(</span><span class="va">tr</span>, method<span class="op">=</span><span class="st">"symm"</span><span class="op">)</span></span>
-<span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://rspatial.org/raster" class="external-link">"raster"</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">36</span>,nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/setValues.html" class="external-link">setValues</a></span><span class="op">(</span><span class="va">r</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">mean</span>, directions<span class="op">=</span><span class="fl">8</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The extent and CRS indicate this raster is a global lat/lon raster. This means that transitions going off of the East or West edges will 'wrap' to the opposite edge.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Global lat/lon rasters are not supported under new optimizations for 4 and 8 directions with custom transition functions. Falling back to old method.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">normalize</span><span class="op">(</span><span class="va">tr</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class      : TransitionLayer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 18, 36, 648  (nrow, ncol, ncell)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 10, 10  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> values      : conductance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> matrix class: dgCMatrix </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">normalize</span><span class="op">(</span><span class="va">tr</span>, method<span class="op">=</span><span class="st">"symm"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class      : TransitionLayer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 18, 36, 648  (nrow, ncol, ncell)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 10, 10  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> values      : conductance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> matrix class: dsCMatrix </span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -131,11 +148,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Jacob van Etten, Kauê de Sousa.</p>
+  <p></p><p>Developed by Jacob van Etten, Andrew Marx.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
