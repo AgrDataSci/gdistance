@@ -1,7 +1,7 @@
 Package: gdistance
 Type: Package
 Title: Distances and Routes on Geographical Grids
-Version: 1.6.4
+Version: 1.6.5
 Authors@R: c(
         person("Jacob", "van Etten", role = c("aut"),
           comment = c(ORCID = "0000-0001-7554-2558")),
@@ -40,5 +40,5 @@ Suggests:
     markdown,
     rmarkdown,
     testthat (>= 2.1.0)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr

@@ -1,3 +1,8 @@
+gdistance 1.6.5 (2025-09-24)
+=========================
+
+* Add package anchors to cross-references for CRAN
+
 gdistance 1.6.4 (2023-06-19)
 =========================
 

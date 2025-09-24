@@ -40,7 +40,7 @@
 #' Objects can be created by calls of the form
 #'  new("Transition", nrows, ncols, xmin, xmax, ymin, ymax, projection).
 #' @section  Extends:
-#' Class \code{\linkS4class{Raster}}
+#' Class \code{\link[raster]{Raster-class}}
 #' @examples
 #' showClass("TransitionLayer")
 #'
